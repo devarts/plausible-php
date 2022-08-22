@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 abstract class PlausibleAPI
 {
-    private Client $client;
+    protected Client $client;
 
     public function __construct(string $token)
     {
