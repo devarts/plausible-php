@@ -1,10 +1,10 @@
 # Plausible API
 
-[![Latest Version](https://img.shields.io/github/release/thephpleague/plausible-api.svg?style=flat-square)](https://github.com/thephpleague/plausible-api/releases)
+[![Latest Version](https://img.shields.io/github/release/marko-ogg/plausible-api.svg?style=flat-square)](https://github.com/marko-ogg/plausible-api/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/thephpleague/plausible-api/master.svg?style=flat-square)](https://travis-ci.org/thephpleague/plausible-api)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/plausible-api.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/plausible-api/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/plausible-api.svg?style=flat-square)](https://scrutinizer-ci.com/g/thephpleague/plausible-api)
+[![Build Status](https://img.shields.io/travis/marko-ogg/plausible-api/master.svg?style=flat-square)](https://travis-ci.org/marko-ogg/plausible-api)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/marko-ogg/plausible-api.svg?style=flat-square)](https://scrutinizer-ci.com/g/marko-ogg/plausible-api/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/marko-ogg/plausible-api.svg?style=flat-square)](https://scrutinizer-ci.com/g/marko-ogg/plausible-api)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/plausible-api.svg?style=flat-square)](https://packagist.org/packages/league/plausible-api)
 
 A PHP wrapper for using Plausible's API.
