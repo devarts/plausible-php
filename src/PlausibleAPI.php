@@ -54,11 +54,45 @@ class PlausibleAPI
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function createEvent(array $payload, array $headers = []): void
+    public function createWebsite(array $payload): void
     {
-        $this->client->post('stats/breakdown', [
-            'headers' => $headers,
+        $this->client->post('sites', [
             'form_params' => $payload,
         ]);
+    }
+
+    public function deleteWebsite(string $site_id): void
+    {
+        $this->client->delete('sites/' . $site_id);
+    }
+
+    public function getWebsite(string $site_id): array
+    {
+        $response = $this->client->get('sites/' . $site_id);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function createSharedLink(array $payload): array
+    {
+        $response = $this->client->put('sites/shared-links', [
+            'form_params' => $payload,
+        ]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function createGoal(array $payload): array
+    {
+        $response = $this->client->put('sites/goals', [
+            'form_params' => $payload,
+        ]);
+
+        return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function deleteGoal(string $goal_id, array $payload): void
+    {
+        $this->client->delete('sites/goals/' . $goal_id);
     }
 }
