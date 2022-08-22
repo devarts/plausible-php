@@ -18,48 +18,47 @@ class PlausibleAPI
         ]);
     }
 
-    public function getRealtimeVisitors(string $site_id): int
+    public function getRealtimeVisitors(array $payload): int
     {
         $response = $this->client->get('stats/realtime/visitors', [
-            'query' => [
-                'site_id' => $site_id,
-            ],
+            'query' => $payload,
         ]);
 
         return (int) $response->getBody()->getContents();
     }
 
-    public function getAggregate(string $site_id, array $payload = []): array
+    public function getAggregate(array $payload): array
     {
         $response = $this->client->get('stats/aggregate', [
-            'query' => array_merge([
-                'site_id' => $site_id,
-            ], $payload),
+            'query' => $payload,
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getTimeseries(string $site_id, array $payload = []): array
+    public function getTimeseries(array $payload): array
     {
         $response = $this->client->get('stats/timeseries', [
-            'query' => array_merge([
-                'site_id' => $site_id,
-            ], $payload),
+            'query' => $payload,
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getBreakdown(string $site_id, string $property, array $payload = []): array
+    public function getBreakdown(array $payload): array
     {
         $response = $this->client->get('stats/breakdown', [
-            'query' => array_merge([
-                'site_id' => $site_id,
-                'property' => $property,
-            ], $payload),
+            'query' => $payload,
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
+    }
+
+    public function createEvent(array $payload, array $headers = []): void
+    {
+        $this->client->post('stats/breakdown', [
+            'headers' => $headers,
+            'form_params' => $payload,
+        ]);
     }
 }
