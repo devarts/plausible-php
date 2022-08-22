@@ -1,34 +1,34 @@
 {
-    "name": "league/:package_name",
-    "description": ":package_description",
+    "name": "marko-ogg/plausible-api",
+    "description": "A PHP wrapper for using Plausible's API",
     "keywords": [
-        "league",
-        "package"
+        "plausible", "api", "wrapper", "client"
     ],
-    "homepage": "https://github.com/php-loep/:package_name",
+    "homepage": "https://github.com/marko-ogg/plausible-api",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author_email@example.com",
-            "homepage": "http://author-website.example.com",
+            "name": "Marko Ognjenovic",
+            "email": "marko.ognjenovicgm@gmail.com",
+            "homepage": "https://github.com/marko-ogg",
             "role": "Developer"
         }
     ],
     "require": {
-        "php" : ">=5.3.0"
+        "php" : ">=7.4",
+        "guzzlehttp/guzzle": "~6.5"
     },
     "require-dev": {
-        "phpunit/phpunit" : "4.*"
+        "phpunit/phpunit" : "7.*"
     },
     "autoload": {
         "psr-4": {
-            "League\\Skeleton\\": "src"
+            "Plausible\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "League\\Skeleton\\Test\\": "tests"
+            "Plausible\\Test\\": "tests"
         }
     },
     "extra": {
