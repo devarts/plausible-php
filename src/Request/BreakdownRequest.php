@@ -8,38 +8,104 @@ use Plausible\Request\Parameter\Period;
 
 class BreakdownRequest implements ApiPayloadPresentable
 {
-    private string $site_id;
-    private string $property;
+    private ?string $site_id;
+    private ?string $property;
     private ?Period $period;
     private ?Metrics $metrics;
     private ?Filters $filters;
-    private int $limit;
-    private int $page;
+    private ?int $limit;
+    private ?int $page;
 
-    public function __construct(
-        string $site_id,
-        string $property,
-        ?Period $period,
-        ?Metrics $metrics,
-        ?Filters $filters,
-        ?int $limit,
-        ?int $page
-    ) {
-        $this->site_id = $site_id;
-        $this->property = $property;
-        $this->period = $period;
-        $this->metrics = $metrics;
-        $this->filters = $filters;
-        $this->limit = $limit;
-        $this->page = $page;
+    private function __construct()
+    {
+        $this->site_id = null;
+        $this->property = null;
+        $this->period = null;
+        $this->metrics = null;
+        $this->filters = null;
+        $this->limit = null;
+        $this->page = null;
+    }
+
+    public static function create(): self
+    {
+        return new self();
+    }
+
+    public function withSiteId(string $site_id): self
+    {
+        $request = clone $this;
+
+        $request->site_id = $site_id;
+
+        return $request;
+    }
+
+    public function withProperty(string $property): self
+    {
+        $request = clone $this;
+
+        $request->property = $property;
+
+        return $request;
+    }
+
+    public function withPeriod(Period $period): self
+    {
+        $request = clone $this;
+
+        $request->period = $period;
+
+        return $request;
+    }
+
+    public function withFilters(Filters $filters): self
+    {
+        $request = clone $this;
+
+        $request->filters = $filters;
+
+        return $request;
+    }
+
+    public function withMetrics(Metrics $metrics): self
+    {
+        $request = clone $this;
+
+        $request->metrics = $metrics;
+
+        return $request;
+    }
+
+    public function withLimit(int $limit): self
+    {
+        $request = clone $this;
+
+        $request->limit = $limit;
+
+        return $request;
+    }
+
+    public function withPage(int $page): self
+    {
+        $request = clone $this;
+
+        $request->page = $page;
+
+        return $request;
     }
 
     public function toApiPayload(): array
     {
-        $data = [
-            'site_id' => $this->site_id,
-            'property' => $this->property,
-        ];
+        $data = [];
+
+        if ($this->site_id) {
+            $data['site_id'] = $this->site_id;
+        }
+
+        if ($this->property) {
+            $data['property'] = $this->property;
+        }
 
         if ($this->limit) {
             $data['limit'] = $this->limit;
