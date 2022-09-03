@@ -3,10 +3,6 @@
 namespace Plausible;
 
 use GuzzleHttp\Client;
-use Plausible\Request\AggregateRequest;
-use Plausible\Request\BreakdownRequest;
-use Plausible\Request\RealtimeVisitorsRequest;
-use Plausible\Request\TimeseriesRequest;
 
 class PlausibleAPI
 {
@@ -22,37 +18,55 @@ class PlausibleAPI
         ]);
     }
 
-    public function getRealtimeVisitors(RealtimeVisitorsRequest $request): int
+    public function getRealtimeVisitors(string $site_id): int
     {
         $response = $this->client->get('stats/realtime/visitors', [
-            'query' => $request->toApiPayload(),
+            'query' => [
+                'site_id' => $site_id,
+            ],
         ]);
 
         return (int) $response->getBody()->getContents();
     }
 
-    public function getAggregate(AggregateRequest $request): array
+    public function getAggregate(string $site_id, array $extras = []): array
     {
         $response = $this->client->get('stats/aggregate', [
-            'query' => $request->toApiPayload(),
+            'query' => array_merge(
+                $extras,
+                [
+                    'site_id' => $site_id,
+                ]
+            ),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getTimeseries(TimeseriesRequest $request): array
+    public function getTimeseries(string $site_id, array $extras = []): array
     {
         $response = $this->client->get('stats/timeseries', [
-            'query' => $request->toApiPayload(),
+            'query' => array_merge(
+                $extras,
+                [
+                    'site_id' => $site_id,
+                ]
+            ),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getBreakdown(BreakdownRequest $request): array
+    public function getBreakdown(string $site_id, string $property, array $extras = []): array
     {
         $response = $this->client->get('stats/breakdown', [
-            'query' => $request->toApiPayload(),
+            'query' => array_merge(
+                $extras,
+                [
+                    'site_id' => $site_id,
+                    'property' => $property,
+                ]
+            ),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
@@ -95,7 +109,7 @@ class PlausibleAPI
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function deleteGoal(string $goal_id, array $payload): void
+    public function deleteGoal(string $goal_id): void
     {
         $this->client->delete('sites/goals/' . $goal_id);
     }
