@@ -3,6 +3,8 @@
 namespace Plausible;
 
 use GuzzleHttp\Client;
+use Plausible\Request\AggregateRequest;
+use Plausible\Request\RealtimeVisitorsRequest;
 
 class PlausibleAPI
 {
@@ -18,19 +20,19 @@ class PlausibleAPI
         ]);
     }
 
-    public function getRealtimeVisitors(array $payload): int
+    public function getRealtimeVisitors(RealtimeVisitorsRequest $request): int
     {
         $response = $this->client->get('stats/realtime/visitors', [
-            'query' => $payload,
+            'query' => $request->toApiPayload(),
         ]);
 
         return (int) $response->getBody()->getContents();
     }
 
-    public function getAggregate(array $payload): array
+    public function getAggregate(AggregateRequest $request): array
     {
         $response = $this->client->get('stats/aggregate', [
-            'query' => $payload,
+            'query' => $request->toApiPayload(),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);

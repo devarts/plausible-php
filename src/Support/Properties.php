@@ -23,4 +23,31 @@ class Properties
     public const VISIT_COUNTRY = 'visit:country';
     public const VISIT_REGION = 'visit:region';
     public const VISIT_CITY = 'visit:city';
+
+    public const SUPPORTED_PROPERTIES = [
+        self::EVENT_NAME,
+        self::EVENT_PAGE,
+        self::VISIT_ENTRY_PAGE,
+        self::VISIT_EXIT_PAGE,
+        self::VISIT_SOURCE,
+        self::VISIT_REFERRER,
+        self::VISIT_UTM_MEDIUM,
+        self::VISIT_UTM_SOURCE,
+        self::VISIT_UTM_CAMPAIGN,
+        self::VISIT_UTM_CONTENT,
+        self::VISIT_UTM_TERM,
+        self::VISIT_DEVICE,
+        self::VISIT_BROWSER,
+        self::VISIT_BROWSER_VERSION,
+        self::VISIT_OS,
+        self::VISIT_OS_VERSION,
+        self::VISIT_COUNTRY,
+        self::VISIT_REGION,
+        self::VISIT_CITY,
+    ];
+
+    public static function isValid(string $value): bool
+    {
+        return in_array($value, self::SUPPORTED_PROPERTIES);
+    }
 }
