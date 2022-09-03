@@ -1,16 +1,16 @@
 {
-    "name": "marko-ogg/plausible-api",
+    "name": "hallowed/plausible-api",
     "description": "A PHP wrapper for using Plausible's API",
     "keywords": [
         "plausible", "api", "wrapper", "client"
     ],
-    "homepage": "https://github.com/marko-ogg/plausible-api",
+    "homepage": "https://github.com/hallowed/plausible-api",
     "license": "MIT",
     "authors": [
         {
             "name": "Marko Ognjenovic",
             "email": "marko.ognjenovicgm@gmail.com",
-            "homepage": "https://github.com/marko-ogg",
+            "homepage": "https://github.com/hallowed",
             "role": "Developer"
         }
     ],
