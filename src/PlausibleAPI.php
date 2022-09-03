@@ -4,6 +4,7 @@ namespace Plausible;
 
 use GuzzleHttp\Client;
 use Plausible\Request\AggregateRequest;
+use Plausible\Request\BreakdownRequest;
 use Plausible\Request\RealtimeVisitorsRequest;
 use Plausible\Request\TimeseriesRequest;
 
@@ -48,10 +49,10 @@ class PlausibleAPI
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getBreakdown(array $payload): array
+    public function getBreakdown(BreakdownRequest $request): array
     {
         $response = $this->client->get('stats/breakdown', [
-            'query' => $payload,
+            'query' => $request->toApiPayload(),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);

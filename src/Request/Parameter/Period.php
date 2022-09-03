@@ -65,10 +65,6 @@ class Period implements ApiPayloadPresentable
 
     public function custom(DateTime $date_from, DateTime $date_to)
     {
-        if ($date_from > $date_to) {
-            throw new LogicException('Date from cannot be greater than date to.');
-        }
-
         return new self(self::CUSTOM, $date_from, $date_to);
     }
 

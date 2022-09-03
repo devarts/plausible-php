@@ -67,10 +67,6 @@ class Metrics implements ApiPayloadPresentable
 
     public function withMetric(string $name): self
     {
-        if (! in_array($name, self::SUPPORTED_METRICS)) {
-            throw new LogicException('Provided metric is not supported.');
-        }
-
         $metrics = clone $this;
 
         $metrics->metrics[] = $name;

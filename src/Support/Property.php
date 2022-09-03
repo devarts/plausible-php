@@ -2,7 +2,7 @@
 
 namespace Plausible\Support;
 
-class Properties
+class Property
 {
     public const EVENT_NAME = 'event:name';
     public const EVENT_PAGE = 'event:page';
