@@ -2,7 +2,6 @@
 
 namespace Plausible\Request\Parameter;
 
-use LogicException;
 use Plausible\Request\ApiPayloadPresentable;
 
 class Metrics implements ApiPayloadPresentable
