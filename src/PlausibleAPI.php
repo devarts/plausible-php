@@ -5,6 +5,7 @@ namespace Plausible;
 use GuzzleHttp\Client;
 use Plausible\Request\AggregateRequest;
 use Plausible\Request\RealtimeVisitorsRequest;
+use Plausible\Request\TimeseriesRequest;
 
 class PlausibleAPI
 {
@@ -38,10 +39,10 @@ class PlausibleAPI
         return json_decode($response->getBody()->getContents(), true);
     }
 
-    public function getTimeseries(array $payload): array
+    public function getTimeseries(TimeseriesRequest $request): array
     {
         $response = $this->client->get('stats/timeseries', [
-            'query' => $payload,
+            'query' => $request->toApiPayload(),
         ]);
 
         return json_decode($response->getBody()->getContents(), true);
