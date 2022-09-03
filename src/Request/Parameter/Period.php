@@ -3,7 +3,6 @@
 namespace Plausible\Request\Parameter;
 
 use DateTime;
-use LogicException;
 use Plausible\Request\ApiPayloadPresentable;
 
 class Period implements ApiPayloadPresentable
@@ -25,13 +24,12 @@ class Period implements ApiPayloadPresentable
      * @param DateTime|null $date_from
      * @param DateTime|null $date_to
      */
-    public function __construct(string $period, ?DateTime $date_from = null, ?DateTime $date_to = null)
+    private function __construct(string $period, ?DateTime $date_from = null, ?DateTime $date_to = null)
     {
         $this->period = $period;
         $this->date_from = $date_from;
         $this->date_to = $date_to;
     }
-
 
     public static function months12(): self
     {

@@ -14,15 +14,6 @@ class Metrics implements ApiPayloadPresentable
     public const EVENTS = 'events';
     public const VISITS = 'visits';
 
-    public const SUPPORTED_METRICS = [
-        self::VISITORS,
-        self::PAGEVIEWS,
-        self::BOUNCE_RATE,
-        self::VISIT_DURATION,
-        self::EVENTS,
-        self::VISITS,
-    ];
-
     private array $metrics;
 
     private function __construct()
