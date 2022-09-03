@@ -3,7 +3,6 @@
 namespace Plausible\Request;
 
 use Plausible\Request\Parameter\Filters;
-use Plausible\Request\Parameter\Interval;
 use Plausible\Request\Parameter\Metrics;
 use Plausible\Request\Parameter\Period;
 
@@ -13,14 +12,14 @@ class TimeseriesRequest implements ApiPayloadPresentable
     private ?Period $period;
     private ?Filters $filters;
     private ?Metrics $metrics;
-    private ?Interval $interval;
+    private ?string $interval;
 
     public function __construct(
         string $site_id,
         ?Period $period,
         ?Filters $filters,
         ?Metrics $metrics,
-        ?Interval $interval
+        ?string $interval
     ) {
         $this->site_id = $site_id;
         $this->period = $period;
@@ -34,6 +33,10 @@ class TimeseriesRequest implements ApiPayloadPresentable
         $data = [
             'site_id' => $this->site_id,
         ];
+
+        if ($this->interval) {
+            $data['interval'] = $this->interval;
+        }
 
         if ($this->metrics) {
             $data = array_merge(
@@ -53,13 +56,6 @@ class TimeseriesRequest implements ApiPayloadPresentable
             $data = array_merge(
                 $data,
                 $this->filters->toApiPayload()
-            );
-        }
-
-        if ($this->interval) {
-            $data = array_merge(
-                $data,
-                $this->interval->toApiPayload()
             );
         }
 
