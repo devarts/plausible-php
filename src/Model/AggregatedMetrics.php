@@ -27,7 +27,7 @@ class AggregatedMetrics
         $this->visits = $visits;
     }
 
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): self
     {
         return new self(
             isset($data['visitors'])
