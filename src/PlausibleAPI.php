@@ -5,7 +5,10 @@ namespace Plausible;
 use GuzzleHttp\Client;
 use Plausible\Model\AggregatedMetrics;
 use Plausible\Model\Breakdown;
+use Plausible\Model\Goal;
+use Plausible\Model\SharedLink;
 use Plausible\Model\Timeseries;
+use Plausible\Model\Website;
 
 class PlausibleAPI
 {
@@ -81,45 +84,59 @@ class PlausibleAPI
         );
     }
 
-    public function createWebsite(array $payload): void
+    public function createWebsite(array $payload): Website
     {
-        $this->client->post('sites', [
+        $response = $this->client->post('sites', [
             'form_params' => $payload,
         ]);
+
+        return Website::fromArray(
+            json_decode($response->getBody()->getContents(), true)
+        );
     }
 
-    public function deleteWebsite(string $site_id): void
+    public function deleteWebsite(string $site_id): bool
     {
-        $this->client->delete('sites/' . $site_id);
+        $response = $this->client->delete('sites/' . $site_id);
+
+        return json_decode($response->getBody()->getContents(), true)['deleted'];
     }
 
-    public function getWebsite(string $site_id): array
+    public function getWebsite(string $site_id): Website
     {
         $response = $this->client->get('sites/' . $site_id);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return Website::fromArray(
+            json_decode($response->getBody()->getContents(), true)
+        );
     }
 
-    public function createSharedLink(array $payload): array
+    public function createSharedLink(array $payload): SharedLink
     {
         $response = $this->client->put('sites/shared-links', [
             'form_params' => $payload,
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return SharedLink::fromArray(
+            json_decode($response->getBody()->getContents(), true)
+        );
     }
 
-    public function createGoal(array $payload): array
+    public function createGoal(array $payload): Goal
     {
         $response = $this->client->put('sites/goals', [
             'form_params' => $payload,
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return Goal::fromArray(
+            json_decode($response->getBody()->getContents(), true)
+        );
     }
 
-    public function deleteGoal(string $goal_id): void
+    public function deleteGoal(string $goal_id): bool
     {
-        $this->client->delete('sites/goals/' . $goal_id);
+        $response = $this->client->delete('sites/goals/' . $goal_id);
+
+        return json_decode($response->getBody()->getContents(), true)['deleted'];
     }
 }
