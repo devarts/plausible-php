@@ -4,6 +4,7 @@ namespace Plausible;
 
 use GuzzleHttp\Client;
 use Plausible\Model\AggregatedMetrics;
+use Plausible\Model\Timeseries;
 
 class PlausibleAPI
 {
@@ -46,7 +47,7 @@ class PlausibleAPI
         );
     }
 
-    public function getTimeseries(string $site_id, array $extras = []): array
+    public function getTimeseries(string $site_id, array $extras = []): Timeseries
     {
         $response = $this->client->get('stats/timeseries', [
             'query' => array_merge(
@@ -57,7 +58,9 @@ class PlausibleAPI
             ),
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return Timeseries::fromArray(
+            json_decode($response->getBody()->getContents(), true)
+        );
     }
 
     public function getBreakdown(string $site_id, string $property, array $extras = []): array
