@@ -43,7 +43,7 @@ class PlausibleAPI
         ]);
 
         return AggregatedMetrics::fromArray(
-            json_decode($response->getBody()->getContents(), true)
+            json_decode($response->getBody()->getContents(), true)['results']
         );
     }
 
@@ -59,7 +59,7 @@ class PlausibleAPI
         ]);
 
         return Timeseries::fromArray(
-            json_decode($response->getBody()->getContents(), true)
+            json_decode($response->getBody()->getContents(), true)['results']
         );
     }
 
