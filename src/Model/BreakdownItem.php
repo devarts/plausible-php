@@ -38,6 +38,8 @@ class BreakdownItem
     public static function fromArray(array $data): self
     {
         foreach (Property::SUPPORTED_PROPERTIES as $property) {
+            $property = explode(':', $property)[1];
+
             if (isset($data[$property])) {
                 $property_value = $data[$property];
                 break;

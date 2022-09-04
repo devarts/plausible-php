@@ -39,8 +39,13 @@ class Filter
         return $filters;
     }
 
-    public function __toString()
+    public function toString(): string
     {
         return implode(';', $this->filters);
+    }
+
+    public function __toString()
+    {
+        return $this->toString();
     }
 }

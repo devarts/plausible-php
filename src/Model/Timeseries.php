@@ -15,15 +15,18 @@ class Timeseries
 
     public static function fromArray(array $data): self
     {
-        $points = [];
+        $items = [];
 
-        foreach ($data as $point) {
-            $points[] = TimeseriesItem::fromArray($point);
+        foreach ($data as $item) {
+            $items[] = TimeseriesItem::fromArray($item);
         }
 
-        return new self($points);
+        return new self($items);
     }
 
+    /**
+     * @return TimeseriesItem[]
+     */
     public function getItems(): array
     {
         return $this->items;

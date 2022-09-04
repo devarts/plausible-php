@@ -22,6 +22,9 @@ class Breakdown
         return new self($items);
     }
 
+    /**
+     * @return BreakdownItem[]
+     */
     public function getItems(): array
     {
         return $this->items;

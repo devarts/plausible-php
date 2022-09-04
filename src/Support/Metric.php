@@ -11,6 +11,15 @@ class Metric
     public const EVENTS = 'events';
     public const VISITS = 'visits';
 
+    public const SUPPORTED_METRICS = [
+        self::VISITORS,
+        self::PAGEVIEWS,
+        self::BOUNCE_RATE,
+        self::VISIT_DURATION,
+        self::EVENTS,
+        self::VISITS,
+    ];
+
     private array $metrics;
 
     private function __construct()
@@ -32,8 +41,13 @@ class Metric
         return $metrics;
     }
 
-    public function __toString()
+    public function toString(): string
     {
         return implode(',', $this->metrics);
+    }
+
+    public function __toString()
+    {
+        return $this->toString();
     }
 }
