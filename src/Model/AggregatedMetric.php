@@ -11,7 +11,7 @@ class AggregatedMetric
         $this->value = $value;
     }
 
-    public static function fromApiResponse(array $data)
+    public static function fromArray(array $data)
     {
         return new self($data['value']);
     }

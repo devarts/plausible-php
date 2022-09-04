@@ -41,7 +41,7 @@ class PlausibleAPI
             ),
         ]);
 
-        return AggregatedMetrics::fromApiResponse(
+        return AggregatedMetrics::fromArray(
             json_decode($response->getBody()->getContents(), true)
         );
     }

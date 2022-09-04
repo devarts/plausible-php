@@ -27,26 +27,26 @@ class AggregatedMetrics
         $this->visits = $visits;
     }
 
-    public static function fromApiResponse(array $data)
+    public static function fromArray(array $data)
     {
         return new self(
             isset($data['visitors'])
-                ? AggregatedMetric::fromApiResponse($data['visitors'])
+                ? AggregatedMetric::fromArray($data['visitors'])
                 : null,
             isset($data['pageviews'])
-                ? AggregatedMetric::fromApiResponse($data['pageviews'])
+                ? AggregatedMetric::fromArray($data['pageviews'])
                 : null,
             isset($data['bounce_rate'])
-                ? AggregatedMetric::fromApiResponse($data['bounce_rate'])
+                ? AggregatedMetric::fromArray($data['bounce_rate'])
                 : null,
             isset($data['visit_duration'])
-                ? AggregatedMetric::fromApiResponse($data['visit_duration'])
+                ? AggregatedMetric::fromArray($data['visit_duration'])
                 : null,
             isset($data['events'])
-                ? AggregatedMetric::fromApiResponse($data['events'])
+                ? AggregatedMetric::fromArray($data['events'])
                 : null,
             isset($data['visits'])
-                ? AggregatedMetric::fromApiResponse($data['visits'])
+                ? AggregatedMetric::fromArray($data['visits'])
                 : null
         );
     }
