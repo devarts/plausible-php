@@ -4,7 +4,7 @@ namespace Plausible\Model;
 
 use DateTime;
 
-class TimeseriesPoint
+class TimeseriesItem
 {
     private DateTime $date;
     private int $visitors;

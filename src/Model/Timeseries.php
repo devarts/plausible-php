@@ -6,11 +6,11 @@ use DateTime;
 
 class Timeseries
 {
-    private array $points;
+    private array $items;
 
-    public function __construct(array $points)
+    public function __construct(array $items)
     {
-        $this->points = $points;
+        $this->items = $items;
     }
 
     public static function fromArray(array $data): self
@@ -18,14 +18,14 @@ class Timeseries
         $points = [];
 
         foreach ($data as $point) {
-            $points[] = TimeseriesPoint::fromArray($point);
+            $points[] = TimeseriesItem::fromArray($point);
         }
 
         return new self($points);
     }
 
-    public function getPoints(): array
+    public function getItems(): array
     {
-        return $this->points;
+        return $this->items;
     }
 }
