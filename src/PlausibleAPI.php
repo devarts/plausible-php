@@ -4,6 +4,7 @@ namespace Plausible;
 
 use GuzzleHttp\Client;
 use Plausible\Model\AggregatedMetrics;
+use Plausible\Model\Breakdown;
 use Plausible\Model\Timeseries;
 
 class PlausibleAPI
@@ -63,7 +64,7 @@ class PlausibleAPI
         );
     }
 
-    public function getBreakdown(string $site_id, string $property, array $extras = []): array
+    public function getBreakdown(string $site_id, string $property, array $extras = []): Breakdown
     {
         $response = $this->client->get('stats/breakdown', [
             'query' => array_merge(
@@ -75,7 +76,9 @@ class PlausibleAPI
             ),
         ]);
 
-        return json_decode($response->getBody()->getContents(), true);
+        return Breakdown::fromArray(
+            json_decode($response->getBody()->getContents(), true)['results']
+        );
     }
 
     public function createWebsite(array $payload): void

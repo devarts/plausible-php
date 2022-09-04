@@ -4,7 +4,7 @@ namespace Plausible\Support;
 
 use LogicException;
 
-class Filters
+class Filter
 {
     public const EQUAL = '=';
     public const NOT_EQUAL = '!=';

@@ -2,6 +2,8 @@
 
 namespace Plausible\Model;
 
+use Plausible\Support\Metric;
+
 class AggregatedMetrics
 {
     private ?AggregatedMetric $visitors;
@@ -30,23 +32,23 @@ class AggregatedMetrics
     public static function fromArray(array $data): self
     {
         return new self(
-            isset($data['visitors'])
-                ? AggregatedMetric::fromArray($data['visitors'])
+            isset($data[Metric::VISITORS])
+                ? AggregatedMetric::fromArray($data[Metric::VISITORS])
                 : null,
-            isset($data['pageviews'])
-                ? AggregatedMetric::fromArray($data['pageviews'])
+            isset($data[Metric::PAGEVIEWS])
+                ? AggregatedMetric::fromArray($data[Metric::PAGEVIEWS])
                 : null,
-            isset($data['bounce_rate'])
-                ? AggregatedMetric::fromArray($data['bounce_rate'])
+            isset($data[Metric::BOUNCE_RATE])
+                ? AggregatedMetric::fromArray($data[Metric::BOUNCE_RATE])
                 : null,
-            isset($data['visit_duration'])
-                ? AggregatedMetric::fromArray($data['visit_duration'])
+            isset($data[Metric::VISIT_DURATION])
+                ? AggregatedMetric::fromArray($data[Metric::VISIT_DURATION])
                 : null,
-            isset($data['events'])
-                ? AggregatedMetric::fromArray($data['events'])
+            isset($data[Metric::EVENTS])
+                ? AggregatedMetric::fromArray($data[Metric::EVENTS])
                 : null,
-            isset($data['visits'])
-                ? AggregatedMetric::fromArray($data['visits'])
+            isset($data[Metric::VISITS])
+                ? AggregatedMetric::fromArray($data[Metric::VISITS])
                 : null
         );
     }

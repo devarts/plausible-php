@@ -2,8 +2,15 @@
 
 namespace Plausible\Support;
 
-class Metrics
+class Metric
 {
+    public const VISITORS = 'visitors';
+    public const PAGEVIEWS = 'pageviews';
+    public const BOUNCE_RATE = 'bounce_rate';
+    public const VISIT_DURATION = 'visit_duration';
+    public const EVENTS = 'events';
+    public const VISITS = 'visits';
+
     private array $metrics;
 
     private function __construct()
@@ -18,7 +25,6 @@ class Metrics
 
     public function add(string $metric): self
     {
-
         $metrics = clone $this;
 
         $metrics->metrics[] = $metric;
