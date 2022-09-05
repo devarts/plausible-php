@@ -1,16 +1,16 @@
 {
-    "name": "devardent/plausible-api",
+    "name": "devarts/plausible-api",
     "description": "A PHP wrapper for using Plausible's API",
     "keywords": [
         "plausible", "api", "wrapper", "client"
     ],
-    "homepage": "https://github.com/devardent/plausible-api",
+    "homepage": "https://github.com/devarts/plausible-api",
     "license": "MIT",
     "authors": [
         {
             "name": "Marko Ognjenovic",
             "email": "marko.ognjenovicgm@gmail.com",
-            "homepage": "https://github.com/devardent",
+            "homepage": "https://github.com/devarts",
             "role": "Developer"
         }
     ],
