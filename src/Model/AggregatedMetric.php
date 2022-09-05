@@ -2,6 +2,8 @@
 
 namespace Plausible\Model;
 
+use LogicException;
+
 class AggregatedMetric
 {
     private float $value;
@@ -15,6 +17,10 @@ class AggregatedMetric
 
     public static function fromArray(array $data): self
     {
+        if (! isset($data['value'])) {
+            throw new LogicException('Missing parameter `value`');
+        }
+
         return new self($data['value'], $data['change'] ?? null);
     }
 
