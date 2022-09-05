@@ -13,8 +13,10 @@ class Timeseries
         $this->items = $items;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromApiResponse(string $json): self
     {
+        $data = json_decode($json, true)['results'];
+
         $items = [];
 
         foreach ($data as $item) {

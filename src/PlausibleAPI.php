@@ -46,9 +46,7 @@ class PlausibleAPI
             ),
         ]);
 
-        return AggregatedMetrics::fromArray(
-            json_decode($response->getBody()->getContents(), true)['results']
-        );
+        return AggregatedMetrics::fromApiResponse($response->getBody()->getContents());
     }
 
     public function getTimeseries(string $site_id, array $extras = []): Timeseries
@@ -62,9 +60,7 @@ class PlausibleAPI
             ),
         ]);
 
-        return Timeseries::fromArray(
-            json_decode($response->getBody()->getContents(), true)['results']
-        );
+        return Timeseries::fromApiResponse($response->getBody()->getContents());
     }
 
     public function getBreakdown(string $site_id, string $property, array $extras = []): Breakdown
@@ -79,9 +75,7 @@ class PlausibleAPI
             ),
         ]);
 
-        return Breakdown::fromArray(
-            json_decode($response->getBody()->getContents(), true)['results']
-        );
+        return Breakdown::fromApiResponse($response->getBody()->getContents());
     }
 
     public function createWebsite(array $payload): Website
@@ -90,9 +84,7 @@ class PlausibleAPI
             'form_params' => $payload,
         ]);
 
-        return Website::fromArray(
-            json_decode($response->getBody()->getContents(), true)
-        );
+        return Website::fromApiResponse($response->getBody()->getContents());
     }
 
     public function deleteWebsite(string $site_id): bool
@@ -106,9 +98,7 @@ class PlausibleAPI
     {
         $response = $this->client->get('sites/' . $site_id);
 
-        return Website::fromArray(
-            json_decode($response->getBody()->getContents(), true)
-        );
+        return Website::fromApiResponse($response->getBody()->getContents());
     }
 
     public function createSharedLink(array $payload): SharedLink
@@ -117,9 +107,7 @@ class PlausibleAPI
             'form_params' => $payload,
         ]);
 
-        return SharedLink::fromArray(
-            json_decode($response->getBody()->getContents(), true)
-        );
+        return SharedLink::fromApiResponse($response->getBody()->getContents());
     }
 
     public function createGoal(array $payload): Goal
@@ -128,9 +116,7 @@ class PlausibleAPI
             'form_params' => $payload,
         ]);
 
-        return Goal::fromArray(
-            json_decode($response->getBody()->getContents(), true)
-        );
+        return Goal::fromApiResponse($response->getBody()->getContents());
     }
 
     public function deleteGoal(string $goal_id): bool

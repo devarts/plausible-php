@@ -29,8 +29,10 @@ class AggregatedMetrics
         $this->visits = $visits;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromApiResponse(string $json)
     {
+        $data = json_decode($json, true)['results'];
+
         return new self(
             isset($data[Metric::VISITORS])
                 ? AggregatedMetric::fromArray($data[Metric::VISITORS])

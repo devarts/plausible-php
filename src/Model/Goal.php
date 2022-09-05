@@ -19,8 +19,10 @@ class Goal
         $this->page_path = $page_path;
     }
 
-    public static function fromArray(array $data): self
+    public static function fromApiResponse(string $json): self
     {
+        $data = json_decode($json, true);
+
         return new self(
             $data['domain'],
             $data['id'],
