@@ -26,7 +26,7 @@ class AggregatedMetricTest extends TestCase
     public function it_should_throw_exception_when_creating_aggregated_metric_from_array_without_value(): void
     {
         $this->expectException(LogicException::class);
-        $this->expectExceptionMessage('Missing parameter `value`');
+        $this->expectExceptionMessage('Missing parameter `value`.');
 
         AggregatedMetric::fromArray([]);
     }
