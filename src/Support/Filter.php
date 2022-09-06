@@ -6,7 +6,7 @@ use LogicException;
 
 class Filter
 {
-    public const EQUAL = '=';
+    public const EQUAL = '==';
     public const NOT_EQUAL = '!=';
 
     public const SUPPORTED_COMPARISONS = [

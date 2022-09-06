@@ -2,35 +2,32 @@
 
 namespace Plausible\Model;
 
-use LogicException;
-
-class AggregatedMetric
+/**
+ * @property int $value
+ * @property float $change
+ */
+class AggregatedMetric extends BaseObject
 {
-    private float $value;
-    private ?float $change;
-
-    public function __construct(float $value, ?float $change)
-    {
-        $this->value = $value;
-        $this->change = $change;
-    }
-
     public static function fromArray(array $data): self
     {
-        if (! isset($data['value'])) {
-            throw new LogicException('Missing parameter `value`.');
+        $aggregated_metric = new self();
+
+        if (array_key_exists('value', $data)) {
+            $aggregated_metric->value = $data['value'];
         }
 
-        return new self($data['value'], $data['change'] ?? null);
+        if (array_key_exists('change', $data)) {
+            $aggregated_metric->change = $data['change'];
+        }
+
+        return $aggregated_metric;
     }
 
-    public function getValue(): float
+    public function getSupportedProperties(): array
     {
-        return $this->value;
-    }
-
-    public function getChange(): ?float
-    {
-        return $this->change;
+        return [
+            'value',
+            'change',
+        ];
     }
 }

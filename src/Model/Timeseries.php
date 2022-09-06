@@ -2,20 +2,16 @@
 
 namespace Plausible\Model;
 
-use DateTime;
-
-class Timeseries
+/**
+ * @property TimeseriesItem[] $items
+ */
+class Timeseries extends BaseObject
 {
-    private array $items;
-
-    public function __construct(array $items)
-    {
-        $this->items = $items;
-    }
-
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];
+
+        $timeseries = new self();
 
         $items = [];
 
@@ -23,14 +19,15 @@ class Timeseries
             $items[] = TimeseriesItem::fromArray($item);
         }
 
-        return new self($items);
+        $timeseries->items = $items;
+
+        return $timeseries;
     }
 
-    /**
-     * @return TimeseriesItem[]
-     */
-    public function getItems(): array
+    public function getSupportedProperties(): array
     {
-        return $this->items;
+        return [
+            'items',
+        ];
     }
 }

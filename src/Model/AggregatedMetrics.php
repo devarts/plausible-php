@@ -4,84 +4,58 @@ namespace Plausible\Model;
 
 use Plausible\Support\Metric;
 
-class AggregatedMetrics
+/**
+ * @property AggregatedMetric $visitors
+ * @property AggregatedMetric $pageviews
+ * @property AggregatedMetric $bounce_rate
+ * @property AggregatedMetric $visit_duration
+ * @property AggregatedMetric $events
+ * @property AggregatedMetric $visits
+ */
+class AggregatedMetrics extends BaseObject
 {
-    private ?AggregatedMetric $visitors;
-    private ?AggregatedMetric $pageviews;
-    private ?AggregatedMetric $bounce_rate;
-    private ?AggregatedMetric $visit_duration;
-    private ?AggregatedMetric $events;
-    private ?AggregatedMetric $visits;
-
-    public function __construct(
-        ?AggregatedMetric $visitors,
-        ?AggregatedMetric $pageviews,
-        ?AggregatedMetric $bounce_rate,
-        ?AggregatedMetric $visit_duration,
-        ?AggregatedMetric $events,
-        ?AggregatedMetric $visits
-    ) {
-        $this->visitors = $visitors;
-        $this->pageviews = $pageviews;
-        $this->bounce_rate = $bounce_rate;
-        $this->visit_duration = $visit_duration;
-        $this->events = $events;
-        $this->visits = $visits;
-    }
-
     public static function fromApiResponse(string $json)
     {
         $data = json_decode($json, true)['results'];
 
-        return new self(
-            isset($data[Metric::VISITORS])
-                ? AggregatedMetric::fromArray($data[Metric::VISITORS])
-                : null,
-            isset($data[Metric::PAGEVIEWS])
-                ? AggregatedMetric::fromArray($data[Metric::PAGEVIEWS])
-                : null,
-            isset($data[Metric::BOUNCE_RATE])
-                ? AggregatedMetric::fromArray($data[Metric::BOUNCE_RATE])
-                : null,
-            isset($data[Metric::VISIT_DURATION])
-                ? AggregatedMetric::fromArray($data[Metric::VISIT_DURATION])
-                : null,
-            isset($data[Metric::EVENTS])
-                ? AggregatedMetric::fromArray($data[Metric::EVENTS])
-                : null,
-            isset($data[Metric::VISITS])
-                ? AggregatedMetric::fromArray($data[Metric::VISITS])
-                : null
-        );
+        $aggregated_metrics = new self();
+
+        if (array_key_exists(Metric::VISITORS, $data)) {
+            $aggregated_metrics->visitors = AggregatedMetric::fromArray($data[Metric::VISITORS]);
+        }
+
+        if (array_key_exists(Metric::PAGEVIEWS, $data)) {
+            $aggregated_metrics->pageviews = AggregatedMetric::fromArray($data[Metric::PAGEVIEWS]);
+        }
+
+        if (array_key_exists(Metric::BOUNCE_RATE, $data)) {
+            $aggregated_metrics->bounce_rate = AggregatedMetric::fromArray($data[Metric::BOUNCE_RATE]);
+        }
+
+        if (array_key_exists(Metric::VISIT_DURATION, $data)) {
+            $aggregated_metrics->visit_duration = AggregatedMetric::fromArray($data[Metric::VISIT_DURATION]);
+        }
+
+        if (array_key_exists(Metric::EVENTS, $data)) {
+            $aggregated_metrics->events = AggregatedMetric::fromArray($data[Metric::EVENTS]);
+        }
+
+        if (array_key_exists(Metric::VISITS, $data)) {
+            $aggregated_metrics->visits = AggregatedMetric::fromArray($data[Metric::VISITS]);
+        }
+
+        return $aggregated_metrics;
     }
 
-    public function getVisitors(): ?AggregatedMetric
+    public function getSupportedProperties(): array
     {
-        return $this->visitors;
-    }
-
-    public function getPageviews(): ?AggregatedMetric
-    {
-        return $this->pageviews;
-    }
-
-    public function getBounceRate(): ?AggregatedMetric
-    {
-        return $this->bounce_rate;
-    }
-
-    public function getVisitDuration(): ?AggregatedMetric
-    {
-        return $this->visit_duration;
-    }
-
-    public function getEvents(): ?AggregatedMetric
-    {
-        return $this->events;
-    }
-
-    public function getVisits(): ?AggregatedMetric
-    {
-        return $this->visits;
+        return [
+            Metric::VISITORS,
+            Metric::PAGEVIEWS,
+            Metric::BOUNCE_RATE,
+            Metric::VISIT_DURATION,
+            Metric::EVENTS,
+            Metric::VISITS,
+        ];
     }
 }

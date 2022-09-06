@@ -2,18 +2,16 @@
 
 namespace Plausible\Model;
 
-class Breakdown
+/**
+ * @property BreakdownItem[] $items
+ */
+class Breakdown extends BaseObject
 {
-    private array $items;
-
-    public function __construct(array $items)
-    {
-        $this->items = $items;
-    }
-
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];
+
+        $breakdown = new self();
 
         $items = [];
 
@@ -21,14 +19,15 @@ class Breakdown
             $items[] = BreakdownItem::fromArray($item);
         }
 
-        return new self($items);
+        $breakdown->items = $items;
+
+        return $breakdown;
     }
 
-    /**
-     * @return BreakdownItem[]
-     */
-    public function getItems(): array
+    public function getSupportedProperties(): array
     {
-        return $this->items;
+        return [
+            'items',
+        ];
     }
 }

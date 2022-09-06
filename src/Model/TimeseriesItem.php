@@ -6,40 +6,56 @@ use DateTime;
 use LogicException;
 use Plausible\Support\Metric;
 
-class TimeseriesItem
+/**
+ * @property DateTime $date
+ * @property int|null $bounce_rate
+ * @property int|null $visit_duration
+ * @property int|null $pageviews
+ * @property int|null $visits
+ * @property int|null $visitors
+ */
+class TimeseriesItem extends BaseObject
 {
-    private DateTime $date;
-    private int $value;
-
-    public function __construct(DateTime $date, int $value)
-    {
-        $this->date = $date;
-        $this->value = $value;
-    }
-
     public static function fromArray(array $data): self
     {
-        foreach (Metric::SUPPORTED_METRICS as $metric) {
-            if (isset($data[$metric])) {
-                $value = $data[$metric];
-                break;
-            }
+        $timeseries_item = new self();
+
+        if (array_key_exists('date', $data)) {
+            $timeseries_item->date = new DateTime($data['date']);
         }
 
-        if (! isset($value)) {
-            throw new LogicException('Timeseries item metric value not found.');
+        if (array_key_exists(Metric::BOUNCE_RATE, $data)) {
+            $timeseries_item->{Metric::BOUNCE_RATE} = $data[Metric::BOUNCE_RATE];
         }
 
-        return new self(new DateTime($data['date']), $value);
+        if (array_key_exists(Metric::VISIT_DURATION, $data)) {
+            $timeseries_item->{Metric::VISIT_DURATION} = $data[Metric::VISIT_DURATION];
+        }
+
+        if (array_key_exists(Metric::PAGEVIEWS, $data)) {
+            $timeseries_item->{Metric::PAGEVIEWS} = $data[Metric::PAGEVIEWS];
+        }
+
+        if (array_key_exists(Metric::VISITS, $data)) {
+            $timeseries_item->{Metric::VISITS} = $data[Metric::VISITS];
+        }
+
+        if (array_key_exists(Metric::VISITORS, $data)) {
+            $timeseries_item->{Metric::VISITORS} = $data[Metric::VISITORS];
+        }
+
+        return $timeseries_item;
     }
 
-    public function getDate(): DateTime
+    public function getSupportedProperties(): array
     {
-        return $this->date;
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
+        return [
+            'date',
+            Metric::BOUNCE_RATE,
+            Metric::VISIT_DURATION,
+            Metric::PAGEVIEWS,
+            Metric::VISITS,
+            Metric::VISITORS,
+        ];
     }
 }

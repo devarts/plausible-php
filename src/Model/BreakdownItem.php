@@ -2,97 +2,90 @@
 
 namespace Plausible\Model;
 
-use LogicException;
 use Plausible\Support\Metric;
 use Plausible\Support\Property;
 
-class BreakdownItem
+/**
+ * @property string $name
+ * @property string $page
+ * @property string $entry_page
+ * @property string $exit_page
+ * @property string $source
+ * @property string $referrer
+ * @property string $utm_medium
+ * @property string $utm_source
+ * @property string $utm_campaign
+ * @property string $utm_content
+ * @property string $utm_term
+ * @property string $device
+ * @property string $browser
+ * @property string $browser_version
+ * @property string $os
+ * @property string $os_version
+ * @property string $country
+ * @property string $region
+ * @property string $city
+ * @property int|null $visitors
+ * @property int|null $pageviews
+ * @property int|null $bounce_rate
+ * @property int|null $visit_duration
+ * @property int|null $events
+ * @property int|null $visits
+ */
+class BreakdownItem extends BaseObject
 {
-    private string $property_value;
-
-    private ?float $visitors;
-    private ?float $pageviews;
-    private ?float $bounce_rate;
-    private ?float $visit_duration;
-    private ?float $events;
-    private ?float $visits;
-
-    public function __construct(
-        string $property_value,
-        ?float $visitors,
-        ?float $pageviews,
-        ?float $bounce_rate,
-        ?float $visit_duration,
-        ?float $events,
-        ?float $visits
-    ) {
-        $this->property_value = $property_value;
-        $this->visitors = $visitors;
-        $this->pageviews = $pageviews;
-        $this->bounce_rate = $bounce_rate;
-        $this->visit_duration = $visit_duration;
-        $this->events = $events;
-        $this->visits = $visits;
-    }
-
     public static function fromArray(array $data): self
     {
+        $breakdown_item = new self();
+
         foreach (Property::SUPPORTED_PROPERTIES as $property) {
             $property = explode(':', $property)[1];
 
-            if (isset($data[$property])) {
-                $property_value = $data[$property];
-                break;
+            if (array_key_exists($property, $data)) {
+                $breakdown_item->$property = $data[$property];
             }
         }
 
-        if (! isset($property_value)) {
-            throw new LogicException('Breakdown item property value not found.');
+        if (array_key_exists(Metric::VISITORS, $data)) {
+            $breakdown_item->{Metric::VISITORS} = $data[Metric::VISITORS];
         }
 
-        return new self(
-            $property_value,
-            $data[Metric::VISITORS] ?? null,
-            $data[Metric::PAGEVIEWS] ?? null,
-            $data[Metric::BOUNCE_RATE] ?? null,
-            $data[Metric::VISIT_DURATION] ?? null,
-            $data[Metric::EVENTS] ?? null,
-            $data[Metric::VISITS] ?? null
-        );
+        if (array_key_exists(Metric::PAGEVIEWS, $data)) {
+            $breakdown_item->{Metric::PAGEVIEWS} = $data[Metric::PAGEVIEWS];
+        }
+
+        if (array_key_exists(Metric::BOUNCE_RATE, $data)) {
+            $breakdown_item->{Metric::BOUNCE_RATE} = $data[Metric::BOUNCE_RATE];
+        }
+
+        if (array_key_exists(Metric::VISIT_DURATION, $data)) {
+            $breakdown_item->{Metric::VISIT_DURATION} = $data[Metric::VISIT_DURATION];
+        }
+
+        if (array_key_exists(Metric::EVENTS, $data)) {
+            $breakdown_item->{Metric::EVENTS} = $data[Metric::EVENTS];
+        }
+
+        if (array_key_exists(Metric::VISITS, $data)) {
+            $breakdown_item->{Metric::VISITS} = $data[Metric::VISITS];
+        }
+
+        return $breakdown_item;
     }
 
-    public function getPropertyValue(): string
+    public function getSupportedProperties(): array
     {
-        return $this->property_value;
-    }
-
-    public function getVisitors(): ?float
-    {
-        return $this->visitors;
-    }
-
-    public function getPageviews(): ?float
-    {
-        return $this->pageviews;
-    }
-
-    public function getBounceRate(): ?float
-    {
-        return $this->bounce_rate;
-    }
-
-    public function getVisitDuration(): ?float
-    {
-        return $this->visit_duration;
-    }
-
-    public function getEvents(): ?float
-    {
-        return $this->events;
-    }
-
-    public function getVisits(): ?float
-    {
-        return $this->visits;
+        return [
+            ...array_map(
+                fn ($property) => explode(':', $property)[1],
+                Property::SUPPORTED_PROPERTIES
+            ),
+            Metric::VISITORS,
+            Metric::PAGEVIEWS,
+            Metric::BOUNCE_RATE,
+            Metric::VISIT_DURATION,
+            Metric::EVENTS,
+            Metric::VISITS,
+        ];
     }
 }
