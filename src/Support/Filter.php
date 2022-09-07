@@ -34,7 +34,7 @@ class Filter
 
         $filters = clone $this;
 
-        $filters->filters[] = $name . ($comparison === self::EQUAL ? '=' : '!=') . implode('|', $values);
+        $filters->filters[] = $name . $comparison . implode('|', $values);
 
         return $filters;
     }
