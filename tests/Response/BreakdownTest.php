@@ -84,6 +84,8 @@ class BreakdownTest extends TestCase
             JSON
         );
 
+        $this->assertEquals(2, count($breakdown->items));
+
         $item_1 = $breakdown->items[0];
 
         $this->assertEquals('Google', $item_1->source);

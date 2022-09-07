@@ -80,6 +80,8 @@ class TimeseriesTest extends TestCase
             JSON
         );
 
+        $this->assertEquals(2, count($timeseries->items));
+
         $item_1 = $timeseries->items[0];
 
         $this->assertEquals('2020-12-01', $item_1->date->format('Y-m-d'));
