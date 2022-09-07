@@ -26,8 +26,18 @@ class Filter
         return new self();
     }
 
-    public function add(string $name, array $values, string $comparison = self::EQUAL): self
+    /**
+     * @param string $name
+     * @param string|array $value
+     * @param string $comparison
+     * @return $this
+     */
+    public function add(string $name, $value, string $comparison = self::EQUAL): self
     {
+        if (! is_array($value) && ! is_scalar($value)) {
+            throw new InvalidArgumentException('Value must be either array or scalar');
+        }
+
         if (! in_array($name, Property::SUPPORTED_PROPERTIES)) {
             throw new InvalidArgumentException("Unsupported property provided: `$name`");
         }
@@ -38,7 +48,7 @@ class Filter
 
         $filters = clone $this;
 
-        $filters->filters[] = $name . $comparison . implode('|', $values);
+        $filters->filters[] = $name . $comparison . (is_array($value) ? implode('|', $value) : $value);
 
         return $filters;
     }
