@@ -51,7 +51,5 @@ class BreakdownItemTest extends TestCase
         $this->assertFalse(property_exists($breakdown_item, 'pageviews'));
         $this->assertFalse(property_exists($breakdown_item, 'visit_duration'));
         $this->assertFalse(property_exists($breakdown_item, 'events'));
-        $this->assertFalse(property_exists($breakdown_item, 'page'));
-        $this->assertFalse(property_exists($breakdown_item, 'browser_version'));
     }
 }

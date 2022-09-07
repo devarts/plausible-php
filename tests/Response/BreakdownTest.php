@@ -94,8 +94,6 @@ class BreakdownTest extends TestCase
         $this->assertFalse(property_exists($item_1, 'pageviews'));
         $this->assertFalse(property_exists($item_1, 'visit_duration'));
         $this->assertFalse(property_exists($item_1, 'events'));
-        $this->assertFalse(property_exists($item_1, 'page'));
-        $this->assertFalse(property_exists($item_1, 'browser_version'));
 
         $item_2 = $breakdown->items[1];
 
@@ -107,7 +105,5 @@ class BreakdownTest extends TestCase
         $this->assertFalse(property_exists($item_2, 'pageviews'));
         $this->assertFalse(property_exists($item_2, 'visit_duration'));
         $this->assertFalse(property_exists($item_2, 'events'));
-        $this->assertFalse(property_exists($item_2, 'page'));
-        $this->assertFalse(property_exists($item_2, 'browser_version'));
     }
 }
