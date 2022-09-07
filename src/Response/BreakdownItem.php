@@ -2,9 +2,6 @@
 
 namespace Plausible\Response;
 
-use Plausible\Support\Metric;
-use Plausible\Support\Property;
-
 /**
  * @property string $name
  * @property string $page

@@ -3,8 +3,6 @@
 namespace Plausible\Response;
 
 use DateTime;
-use LogicException;
-use Plausible\Support\Metric;
 
 /**
  * @property DateTime $date
