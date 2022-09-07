@@ -17,10 +17,11 @@ class PlausibleAPI
     public function __construct(string $token)
     {
         $this->client = new Client([
-          'base_uri' => 'https://plausible.io/api/v1/',
-          'headers'  => [
-            'Authorization' => sprintf('Bearer %s', $token),
-          ],
+            'base_uri' => 'https://plausible.io/api/v1/',
+            'headers' => [
+                'Authorization' => sprintf('Bearer %s', $token),
+            ],
+            'http_errors' => true,
         ]);
     }
 
