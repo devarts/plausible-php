@@ -37,7 +37,9 @@ class TimeseriesTest extends TestCase
             JSON
         );
 
-        $item_1 = $timeseries->items[0];
+        $items = $timeseries->getIterator();
+
+        $item_1 = $items[0];
 
         $this->assertEquals('2020-12-01', $item_1->date->format('Y-m-d'));
         $this->assertEquals(58, $item_1->bounce_rate);
@@ -46,7 +48,7 @@ class TimeseriesTest extends TestCase
         $this->assertEquals(347, $item_1->visit_duration);
         $this->assertEquals(20000, $item_1->visits);
 
-        $item_2 = $timeseries->items[1];
+        $item_2 = $items[1];
 
         $this->assertEquals('2020-12-02', $item_2->date->format('Y-m-d'));
         $this->assertEquals(23, $item_2->bounce_rate);
@@ -80,9 +82,11 @@ class TimeseriesTest extends TestCase
             JSON
         );
 
-        $this->assertEquals(2, count($timeseries->items));
+        $items = $timeseries->getIterator();
 
-        $item_1 = $timeseries->items[0];
+        $this->assertEquals(2, count($items));
+
+        $item_1 = $items[0];
 
         $this->assertEquals('2020-12-01', $item_1->date->format('Y-m-d'));
         $this->assertEquals(58.0, $item_1->bounce_rate);
@@ -92,7 +96,7 @@ class TimeseriesTest extends TestCase
         $this->assertFalse(property_exists($item_1, 'pageviews'));
         $this->assertFalse(property_exists($item_1, 'visit_duration'));
 
-        $item_2 = $timeseries->items[1];
+        $item_2 = $items[1];
 
         $this->assertEquals('2020-12-02', $item_2->date->format('Y-m-d'));
         $this->assertEquals(23, $item_2->bounce_rate);

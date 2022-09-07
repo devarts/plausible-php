@@ -2,24 +2,32 @@
 
 namespace Plausible\Response;
 
+use ArrayIterator;
+use IteratorAggregate;
+use Traversable;
+
 /**
- * @property BreakdownItem[] $items
+ * @template IteratorAggregate<BreakdownItem>
  */
-class Breakdown extends BaseArray
+class Breakdown implements IteratorAggregate
 {
+    private array $items = [];
+
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];
 
         $breakdown = new self();
 
-        $breakdown->parseValues($data);
+        foreach ($data as $item) {
+            $breakdown->items[] = BreakdownItem::fromArray($item);
+        }
 
         return $breakdown;
     }
 
-    protected function parseValue($value)
+    public function getIterator(): Traversable
     {
-        return BreakdownItem::fromArray($value);
+        return new ArrayIterator($this->items);
     }
 }

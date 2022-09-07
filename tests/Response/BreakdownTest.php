@@ -39,7 +39,9 @@ class BreakdownTest extends TestCase
             JSON
         );
 
-        $item_1 = $breakdown->items[0];
+        $items = $breakdown->getIterator();
+
+        $item_1 = $items[0];
 
         $this->assertEquals('Google', $item_1->source);
         $this->assertEquals(58, $item_1->bounce_rate);
@@ -49,7 +51,7 @@ class BreakdownTest extends TestCase
         $this->assertEquals(25, $item_1->events);
         $this->assertEquals(20000, $item_1->visits);
 
-        $item_2 = $breakdown->items[1];
+        $item_2 = $items[1];
 
         $this->assertEquals('Chrome', $item_2->source);
         $this->assertEquals(23, $item_2->bounce_rate);
@@ -84,9 +86,11 @@ class BreakdownTest extends TestCase
             JSON
         );
 
-        $this->assertEquals(2, count($breakdown->items));
+        $items = $breakdown->getIterator();
 
-        $item_1 = $breakdown->items[0];
+        $this->assertEquals(2, count($items));
+
+        $item_1 = $items[0];
 
         $this->assertEquals('Google', $item_1->source);
         $this->assertEquals(58.0, $item_1->bounce_rate);
@@ -97,7 +101,7 @@ class BreakdownTest extends TestCase
         $this->assertFalse(property_exists($item_1, 'visit_duration'));
         $this->assertFalse(property_exists($item_1, 'events'));
 
-        $item_2 = $breakdown->items[1];
+        $item_2 = $items[1];
 
         $this->assertEquals('Chrome', $item_2->source);
         $this->assertEquals(23, $item_2->bounce_rate);
