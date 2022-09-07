@@ -13,9 +13,6 @@ jobs:
       - uses: php-actions/composer@v5
         with:
           php_version: "7.4"
-      - uses: php-actions/phpunit@v3
-        with:
-          bootstrap: vendor/autoload.php
-          configuration: phpunit.xml
-          php_version: "7.4"
-          version: "7.*"
+      - name: Run unit tests
+        run: |
+          vendor/bin/phpunit
