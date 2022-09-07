@@ -24,4 +24,15 @@ class TimeseriesItem extends BaseObject
 
         return $timeseries_item;
     }
+
+    protected function createProperty($name, $value): void
+    {
+        switch ($name) {
+            case 'date':
+                $this->$name = new DateTime($value);
+                break;
+            default:
+                parent::createProperty($name, $value);
+        }
+    }
 }
