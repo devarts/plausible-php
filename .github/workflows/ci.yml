@@ -10,9 +10,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: php-actions/composer@v5
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
         with:
-          php_version: "7.4"
+          tools: composer
+      - name: Install dependencies
+        run: |
+          composer install
       - name: Run unit tests
         run: |
           vendor/bin/phpunit
