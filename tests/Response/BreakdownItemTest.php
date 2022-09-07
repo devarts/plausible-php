@@ -1,10 +1,9 @@
 <?php
 
-namespace Plausible\Test\Model;
+namespace Plausible\Test\Response;
 
-use LogicException;
 use PHPUnit\Framework\TestCase;
-use Plausible\Model\BreakdownItem;
+use Plausible\Response\BreakdownItem;
 
 class BreakdownItemTest extends TestCase
 {

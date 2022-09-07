@@ -1,6 +1,6 @@
 <?php
 
-namespace Plausible\Model;
+namespace Plausible\Response;
 
 /**
  * @property BreakdownItem[] $items
@@ -13,21 +13,13 @@ class Breakdown extends BaseObject
 
         $breakdown = new self();
 
-        $items = [];
-
-        foreach ($data as $item) {
-            $items[] = BreakdownItem::fromArray($item);
-        }
-
-        $breakdown->items = $items;
+        $breakdown->createProperties($data);
 
         return $breakdown;
     }
 
-    public function getSupportedProperties(): array
+    protected function createProperty($name, $value): void
     {
-        return [
-            'items',
-        ];
+        $this->items[] = BreakdownItem::fromArray($value);
     }
 }

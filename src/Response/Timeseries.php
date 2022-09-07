@@ -1,6 +1,6 @@
 <?php
 
-namespace Plausible\Model;
+namespace Plausible\Response;
 
 /**
  * @property TimeseriesItem[] $items
@@ -13,21 +13,13 @@ class Timeseries extends BaseObject
 
         $timeseries = new self();
 
-        $items = [];
-
-        foreach ($data as $item) {
-            $items[] = TimeseriesItem::fromArray($item);
-        }
-
-        $timeseries->items = $items;
+        $timeseries->createProperties($data);
 
         return $timeseries;
     }
 
-    public function getSupportedProperties(): array
+    protected function createProperty($name, $value): void
     {
-        return [
-            'items',
-        ];
+        $this->items[] = TimeseriesItem::fromArray($value);
     }
 }

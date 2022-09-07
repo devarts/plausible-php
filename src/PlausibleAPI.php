@@ -3,12 +3,12 @@
 namespace Plausible;
 
 use GuzzleHttp\Client;
-use Plausible\Model\AggregatedMetrics;
-use Plausible\Model\Breakdown;
-use Plausible\Model\Goal;
-use Plausible\Model\SharedLink;
-use Plausible\Model\Timeseries;
-use Plausible\Model\Website;
+use Plausible\Response\AggregatedMetrics;
+use Plausible\Response\Breakdown;
+use Plausible\Response\Goal;
+use Plausible\Response\SharedLink;
+use Plausible\Response\Timeseries;
+use Plausible\Response\Website;
 
 class PlausibleAPI
 {

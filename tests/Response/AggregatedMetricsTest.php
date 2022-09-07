@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Model;
+namespace Plausible\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Model\AggregatedMetrics;
+use Plausible\Response\AggregatedMetrics;
 
 class AggregatedMetricsTest extends TestCase
 {

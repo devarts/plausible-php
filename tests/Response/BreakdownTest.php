@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Model;
+namespace Plausible\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Model\Breakdown;
+use Plausible\Response\Breakdown;
 
 class BreakdownTest extends TestCase
 {
