@@ -16,7 +16,7 @@ class AggregatedMetricTest extends TestCase
             'value' => 23,
         ]);
 
-        $this->assertEquals(23.5, $metric->value);
+        $this->assertEquals(23, $metric->value);
         $this->assertFalse(property_exists($metric, 'change'));
     }
 
@@ -30,7 +30,7 @@ class AggregatedMetricTest extends TestCase
             'change' => -32.2
         ]);
 
-        $this->assertEquals(23.5, $metric->value);
+        $this->assertEquals(23, $metric->value);
         $this->assertEquals(-32.2, $metric->change);
     }
 }
