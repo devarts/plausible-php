@@ -13,7 +13,7 @@ class AggregatedMetricTest extends TestCase
     public function it_should_create_aggregated_metric_from_array_without_change_property(): void
     {
         $metric = AggregatedMetric::fromArray([
-            'value' => 23.5,
+            'value' => 23,
         ]);
 
         $this->assertEquals(23.5, $metric->value);
@@ -26,7 +26,7 @@ class AggregatedMetricTest extends TestCase
     public function it_should_create_aggregated_metric_from_array(): void
     {
         $metric = AggregatedMetric::fromArray([
-            'value' => 23.5,
+            'value' => 23,
             'change' => -32.2
         ]);
 
