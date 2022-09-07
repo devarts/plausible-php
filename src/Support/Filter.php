@@ -2,7 +2,7 @@
 
 namespace Plausible\Support;
 
-use LogicException;
+use InvalidArgumentException;
 
 class Filter
 {
@@ -28,8 +28,12 @@ class Filter
 
     public function add(string $name, array $values, string $comparison = self::EQUAL): self
     {
+        if (! in_array($name, Property::SUPPORTED_PROPERTIES)) {
+            throw new InvalidArgumentException("Unsupported property provided: `$name`");
+        }
+
         if (! in_array($comparison, self::SUPPORTED_COMPARISONS)) {
-            throw new LogicException('Provided comparison is not supported.');
+            throw new InvalidArgumentException("Unsupported comparison provided: `$comparison`");
         }
 
         $filters = clone $this;

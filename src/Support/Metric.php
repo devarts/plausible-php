@@ -2,6 +2,8 @@
 
 namespace Plausible\Support;
 
+use InvalidArgumentException;
+
 class Metric
 {
     public const VISITORS = 'visitors';
@@ -34,6 +36,10 @@ class Metric
 
     public function add(string $metric): self
     {
+        if (! in_array($metric, self::SUPPORTED_METRICS)) {
+            throw new InvalidArgumentException("Unsupported metric provided: `$metric`");
+        }
+
         $metrics = clone $this;
 
         $metrics->metrics[] = $metric;
