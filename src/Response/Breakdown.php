@@ -5,7 +5,7 @@ namespace Plausible\Response;
 /**
  * @property BreakdownItem[] $items
  */
-class Breakdown extends BaseObject
+class Breakdown extends BaseArray
 {
     public static function fromApiResponse(string $json): self
     {
@@ -13,13 +13,13 @@ class Breakdown extends BaseObject
 
         $breakdown = new self();
 
-        $breakdown->createProperties($data);
+        $breakdown->parseValues($data);
 
         return $breakdown;
     }
 
-    protected function createProperty($name, $value): void
+    protected function parseValue($value)
     {
-        $this->items[] = BreakdownItem::fromArray($value);
+        return BreakdownItem::fromArray($value);
     }
 }

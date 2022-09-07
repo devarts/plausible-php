@@ -5,7 +5,7 @@ namespace Plausible\Response;
 /**
  * @property TimeseriesItem[] $items
  */
-class Timeseries extends BaseObject
+class Timeseries extends BaseArray
 {
     public static function fromApiResponse(string $json): self
     {
@@ -13,13 +13,13 @@ class Timeseries extends BaseObject
 
         $timeseries = new self();
 
-        $timeseries->createProperties($data);
+        $timeseries->parseValues($data);
 
         return $timeseries;
     }
 
-    protected function createProperty($name, $value): void
+    protected function parseValue($value)
     {
-        $this->items[] = TimeseriesItem::fromArray($value);
+        return TimeseriesItem::fromArray($value);
     }
 }
