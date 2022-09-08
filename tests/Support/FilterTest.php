@@ -18,11 +18,10 @@ class FilterTest extends TestCase
             ->add(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
             ->add(Property::EVENT_NAME, 'Signup')
             ->add(Property::VISIT_COUNTRY, 'Germany', Filter::NOT_EQUAL)
-            ->add(Property::VISIT_CITY, ['Prague', 'Vienna'], Filter::NOT_EQUAL)
             ->add(Property::VISIT_OS_VERSION, 2.2);
 
         $this->assertEquals(
-            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:city!=Prague|Vienna;visit:os_version==2.2',
+            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2',
             $filter->toString()
         );
     }
@@ -35,6 +34,17 @@ class FilterTest extends TestCase
         $filter = Filter::create();
 
         $this->assertEquals('', $filter->toString());
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_exception_when_filtering_multiple_values_with_not_equal_comparison(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Cannot filter multiple values with `!=` comparison');
+
+        Filter::create()->add(Property::VISIT_CITY, ['Prague', 'Vienna'], Filter::NOT_EQUAL);
     }
 
     /**

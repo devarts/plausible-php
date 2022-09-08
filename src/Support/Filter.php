@@ -40,6 +40,10 @@ class Filter
             throw new InvalidArgumentException('Value must be either array or scalar');
         }
 
+        if (is_array($value) && $comparison === self::NOT_EQUAL) {
+            throw new InvalidArgumentException('Cannot filter multiple values with `!=` comparison');
+        }
+
         if (! in_array($name, Property::SUPPORTED_PROPERTIES)) {
             throw new InvalidArgumentException("Unsupported property provided: `$name`");
         }
