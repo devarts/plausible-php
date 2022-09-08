@@ -31,6 +31,10 @@ namespace Plausible\Response;
  */
 class BreakdownItem extends BaseObject
 {
+    /**
+     * @param array $data
+     * @return static
+     */
     public static function fromArray(array $data): self
     {
         $breakdown_item = new self();

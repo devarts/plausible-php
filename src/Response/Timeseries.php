@@ -2,17 +2,17 @@
 
 namespace Plausible\Response;
 
-use ArrayIterator;
 use IteratorAggregate;
-use Traversable;
 
 /**
- * @implements IteratorAggregate<TimeseriesItem>
+ * @implements IteratorAggregate<int,TimeseriesItem>
  */
-class Timeseries implements IteratorAggregate
+class Timeseries extends BaseArray
 {
-    private array $items = [];
-
+    /**
+     * @param string $json
+     * @return static
+     */
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];
@@ -24,10 +24,5 @@ class Timeseries implements IteratorAggregate
         }
 
         return $timeseries;
-    }
-
-    public function getIterator(): Traversable
-    {
-        return new ArrayIterator($this->items);
     }
 }

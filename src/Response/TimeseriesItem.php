@@ -3,6 +3,7 @@
 namespace Plausible\Response;
 
 use DateTime;
+use Exception;
 
 /**
  * @property DateTime $date
@@ -14,6 +15,10 @@ use DateTime;
  */
 class TimeseriesItem extends BaseObject
 {
+    /**
+     * @param array $data
+     * @return static
+     */
     public static function fromArray(array $data): self
     {
         $timeseries_item = new self();
@@ -23,6 +28,12 @@ class TimeseriesItem extends BaseObject
         return $timeseries_item;
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return void
+     * @throws Exception
+     */
     protected function createProperty($name, $value): void
     {
         switch ($name) {

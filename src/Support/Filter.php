@@ -14,13 +14,14 @@ class Filter
         self::NOT_EQUAL,
     ];
 
-    private array $filters;
+    /**
+     * @var array
+     */
+    private array $filters = [];
 
-    private function __construct()
-    {
-        $this->filters = [];
-    }
-
+    /**
+     * @return static
+     */
     public static function create(): self
     {
         return new self();
@@ -28,9 +29,10 @@ class Filter
 
     /**
      * @param string $name
-     * @param string|array $value
+     * @param $value
      * @param string $comparison
      * @return $this
+     * @throws InvalidArgumentException
      */
     public function add(string $name, $value, string $comparison = self::EQUAL): self
     {
@@ -53,11 +55,17 @@ class Filter
         return $filters;
     }
 
+    /**
+     * @return string
+     */
     public function toString(): string
     {
         return implode(';', $this->filters);
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->toString();
