@@ -15,23 +15,17 @@ class Filter
     ];
 
     /**
-     * @var array
+     * @var string[]
      */
     private array $filters = [];
 
-    /**
-     * @return static
-     */
     public static function create(): self
     {
         return new self();
     }
 
     /**
-     * @param string $name
-     * @param $value
-     * @param string $comparison
-     * @return $this
+     * @param scalar|array $value
      * @throws InvalidArgumentException
      */
     public function add(string $name, $value, string $comparison = self::EQUAL): self
@@ -59,17 +53,11 @@ class Filter
         return $filters;
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         return implode(';', $this->filters);
     }
 
-    /**
-     * @return string
-     */
     public function __toString()
     {
         return $this->toString();

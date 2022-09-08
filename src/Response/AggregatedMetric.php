@@ -8,10 +8,6 @@ namespace Plausible\Response;
  */
 class AggregatedMetric extends BaseObject
 {
-    /**
-     * @param array $data
-     * @return static
-     */
     public static function fromArray(array $data): self
     {
         $aggregated_metric = new self();

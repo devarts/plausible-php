@@ -9,10 +9,6 @@ use IteratorAggregate;
  */
 class Timeseries extends BaseArray
 {
-    /**
-     * @param string $json
-     * @return static
-     */
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];

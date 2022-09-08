@@ -23,22 +23,15 @@ class Metric
     ];
 
     /**
-     * @var array
+     * @var string[]
      */
     private array $metrics = [];
 
-    /**
-     * @return static
-     */
     public static function create(): self
     {
         return new self();
     }
 
-    /**
-     * @param string $metric
-     * @return $this
-     */
     public function add(string $metric): self
     {
         if (! in_array($metric, self::SUPPORTED_METRICS)) {
@@ -52,17 +45,11 @@ class Metric
         return $metrics;
     }
 
-    /**
-     * @return string
-     */
     public function toString(): string
     {
         return implode(',', $this->metrics);
     }
 
-    /**
-     * @return string
-     */
     public function __toString()
     {
         return $this->toString();

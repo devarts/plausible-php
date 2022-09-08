@@ -12,10 +12,6 @@ namespace Plausible\Response;
  */
 class AggregatedMetrics extends BaseObject
 {
-    /**
-     * @param string $json
-     * @return static
-     */
     public static function fromApiResponse(string $json): self
     {
         $data = json_decode($json, true)['results'];
@@ -27,11 +23,6 @@ class AggregatedMetrics extends BaseObject
         return $aggregated_metrics;
     }
 
-    /**
-     * @param $name
-     * @param $value
-     * @return void
-     */
     protected function createProperty($name, $value): void
     {
         $this->$name = AggregatedMetric::fromArray($value);
