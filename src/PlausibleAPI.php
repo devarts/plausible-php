@@ -97,7 +97,7 @@ class PlausibleAPI
 
     public function getWebsite(string $site_id): Website
     {
-        $response = $this->client->get('sites/' . $site_id);
+        $response = $this->client->get('sites/' . urlencode($site_id));
 
         return Website::fromApiResponse($response->getBody()->getContents());
     }
