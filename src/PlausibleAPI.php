@@ -90,7 +90,7 @@ class PlausibleAPI
 
     public function deleteWebsite(string $site_id): bool
     {
-        $response = $this->client->delete('sites/' . $site_id);
+        $response = $this->client->delete('sites/' . urlencode($site_id));
 
         return json_decode($response->getBody()->getContents(), true)['deleted'];
     }
@@ -122,7 +122,7 @@ class PlausibleAPI
 
     public function deleteGoal(string $goal_id): bool
     {
-        $response = $this->client->delete('sites/goals/' . $goal_id);
+        $response = $this->client->delete('sites/goals/' . urlencode($goal_id));
 
         return json_decode($response->getBody()->getContents(), true)['deleted'];
     }
