@@ -4,6 +4,8 @@ namespace Plausible\Response;
 
 abstract class BaseObject
 {
+    protected function __construct() {}
+
     protected function createProperties(array $data): void
     {
         foreach ($data as $name => $value) {
