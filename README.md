@@ -33,7 +33,7 @@ $timeseries = $plausible->getTimeseries('example.com', [
         ->add(Plausible\Support\Metric::VISITORS)
         ->toString(),
     'filters' => Plausible\Support\Filter::create()
-        ->add(Plausible\Support\Property::VISIT_SOURCE, 'Chrome', Plausible\Support\Filter::NOT_EQUAL)
+        ->add(Plausible\Support\Property::VISIT_BROWSER, 'Chrome', Plausible\Support\Filter::NOT_EQUAL)
         ->toString(),
 ]);
 
