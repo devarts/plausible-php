@@ -1,10 +1,10 @@
 {
-    "name": "devarts/plausible-api",
+    "name": "devarts/plausible-php",
     "description": "A PHP wrapper for using Plausible API",
     "keywords": [
-        "plausible", "api", "wrapper", "client"
+        "plausible", "api", "wrapper", "client", "php"
     ],
-    "homepage": "https://github.com/devarts/plausible-api",
+    "homepage": "https://github.com/devarts/plausible-php",
     "license": "MIT",
     "authors": [
         {
