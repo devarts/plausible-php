@@ -44,7 +44,7 @@ foreach ($timeseries as $timepoint) {
 
 ## Credits
 
-- [Marko Ognjenović](https://github.com/devarts)
+- [Marko Ognjenović](https://github.com/marko-ogg)
 - [All Contributors](https://github.com/devarts/plausible-php/contributors)
 
 ## License
