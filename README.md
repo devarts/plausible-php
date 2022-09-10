@@ -27,18 +27,18 @@ Simple usage looks like:
 $plausible = new Plausible\PlausibleAPI('{plausible_api_token}');
 
 $timeseries = $plausible->getTimeseries('example.com', [
-    'period' => Period::DAYS_30,
-    'metrics' => Metric::create()
-        ->add(Metric::BOUNCE_RATE)
-        ->add(Metric::VISITORS)
+    'period' => Plausible\Support\Period::DAYS_30,
+    'metrics' => Plausible\Support\Metric::create()
+        ->add(Plausible\Support\Metric::BOUNCE_RATE)
+        ->add(Plausible\Support\Metric::VISITORS)
         ->toString(),
-    'filters' => Filter::create()
-        ->add(Property::VISIT_SOURCE, 'Chrome', Filter::NOT_EQUAL)
+    'filters' => Plausible\Support\Filter::create()
+        ->add(Plausible\Support\Property::VISIT_SOURCE, 'Chrome', Plausible\Support\Filter::NOT_EQUAL)
         ->toString(),
-])
+]);
 
 foreach ($timeseries as $timepoint) {
-    echo "{$timepoint->date} | {$timepoint->bounce_rate} | {$timepoint->visitors}";
+    echo "{$timepoint->date->format('Y-m-d')} | {$timepoint->bounce_rate} | {$timepoint->visitors}";
 }
 ```
 
