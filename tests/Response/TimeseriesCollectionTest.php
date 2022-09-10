@@ -3,16 +3,16 @@
 namespace Plausible\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Response\Timeseries;
+use Plausible\Response\TimeseriesCollection;
 
-class TimeseriesTest extends TestCase
+class TimeseriesCollectionTest extends TestCase
 {
     /**
      * @test
      */
     public function it_should_create_timeseries_from_api_response_for_all_metrics(): void
     {
-        $timeseries = Timeseries::fromApiResponse(
+        $timeseries = TimeseriesCollection::fromApiResponse(
             <<<JSON
                 {
                   "results": [
@@ -37,9 +37,7 @@ class TimeseriesTest extends TestCase
             JSON
         );
 
-        $items = $timeseries->getIterator();
-
-        $item_1 = $items[0];
+        $item_1 = $timeseries->current();
 
         $this->assertEquals('2020-12-01', $item_1->date->format('Y-m-d'));
         $this->assertEquals(58, $item_1->bounce_rate);
@@ -48,7 +46,9 @@ class TimeseriesTest extends TestCase
         $this->assertEquals(347, $item_1->visit_duration);
         $this->assertEquals(20000, $item_1->visits);
 
-        $item_2 = $items[1];
+        $timeseries->next();
+
+        $item_2 = $timeseries->current();
 
         $this->assertEquals('2020-12-02', $item_2->date->format('Y-m-d'));
         $this->assertEquals(23, $item_2->bounce_rate);
@@ -63,7 +63,7 @@ class TimeseriesTest extends TestCase
      */
     public function it_should_create_timeseries_from_api_response_for_some_metrics(): void
     {
-        $timeseries = Timeseries::fromApiResponse(
+        $timeseries = TimeseriesCollection::fromApiResponse(
             <<<JSON
                 {
                   "results": [
@@ -82,11 +82,9 @@ class TimeseriesTest extends TestCase
             JSON
         );
 
-        $items = $timeseries->getIterator();
+        $this->assertEquals(2, count($timeseries));
 
-        $this->assertEquals(2, count($items));
-
-        $item_1 = $items[0];
+        $item_1 = $timeseries->current();
 
         $this->assertEquals('2020-12-01', $item_1->date->format('Y-m-d'));
         $this->assertEquals(58.0, $item_1->bounce_rate);
@@ -96,7 +94,9 @@ class TimeseriesTest extends TestCase
         $this->assertFalse(property_exists($item_1, 'pageviews'));
         $this->assertFalse(property_exists($item_1, 'visit_duration'));
 
-        $item_2 = $items[1];
+        $timeseries->next();
+
+        $item_2 = $timeseries->current();
 
         $this->assertEquals('2020-12-02', $item_2->date->format('Y-m-d'));
         $this->assertEquals(23, $item_2->bounce_rate);

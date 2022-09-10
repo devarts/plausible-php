@@ -4,10 +4,10 @@ namespace Plausible;
 
 use GuzzleHttp\Client;
 use Plausible\Response\AggregatedMetrics;
-use Plausible\Response\Breakdown;
+use Plausible\Response\BreakdownCollection;
 use Plausible\Response\Goal;
 use Plausible\Response\SharedLink;
-use Plausible\Response\Timeseries;
+use Plausible\Response\TimeseriesCollection;
 use Plausible\Response\Website;
 
 class PlausibleAPI
@@ -50,7 +50,7 @@ class PlausibleAPI
         return AggregatedMetrics::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function getTimeseries(string $site_id, array $extras = []): Timeseries
+    public function getTimeseries(string $site_id, array $extras = []): TimeseriesCollection
     {
         $response = $this->client->get('stats/timeseries', [
             'query' => array_merge(
@@ -61,10 +61,10 @@ class PlausibleAPI
             ),
         ]);
 
-        return Timeseries::fromApiResponse($response->getBody()->getContents());
+        return TimeseriesCollection::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function getBreakdown(string $site_id, string $property, array $extras = []): Breakdown
+    public function getBreakdown(string $site_id, string $property, array $extras = []): BreakdownCollection
     {
         $response = $this->client->get('stats/breakdown', [
             'query' => array_merge(
@@ -76,7 +76,7 @@ class PlausibleAPI
             ),
         ]);
 
-        return Breakdown::fromApiResponse($response->getBody()->getContents());
+        return BreakdownCollection::fromApiResponse($response->getBody()->getContents());
     }
 
     public function createWebsite(array $payload): Website
