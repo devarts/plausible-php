@@ -24,16 +24,16 @@ $ composer require devarts/plausible-php
 Simple usage looks like:
 
 ``` php
-$plausible = new Plausible\PlausibleAPI('{plausible_api_token}');
+$plausible = new Devarts\PlausiblePHP\PlausibleAPI('{plausible_api_token}');
 
 $timeseries = $plausible->getTimeseries('example.com', [
-    'period' => Plausible\Support\Period::DAYS_30,
-    'metrics' => Plausible\Support\Metric::create()
-        ->add(Plausible\Support\Metric::BOUNCE_RATE)
-        ->add(Plausible\Support\Metric::VISITORS)
+    'period' => Devarts\PlausiblePHP\Support\Period::DAYS_30,
+    'metrics' => Devarts\PlausiblePHP\Support\Metric::create()
+        ->add(Devarts\PlausiblePHP\Support\Metric::BOUNCE_RATE)
+        ->add(Devarts\PlausiblePHP\Support\Metric::VISITORS)
         ->toString(),
-    'filters' => Plausible\Support\Filter::create()
-        ->add(Plausible\Support\Property::VISIT_BROWSER, 'Chrome', Plausible\Support\Filter::NOT_EQUAL)
+    'filters' => Devarts\PlausiblePHP\Support\Filter::create()
+        ->add(Devarts\PlausiblePHP\Support\Property::VISIT_BROWSER, 'Chrome', Devarts\PlausiblePHP\Support\Filter::NOT_EQUAL)
         ->toString(),
 ]);
 
