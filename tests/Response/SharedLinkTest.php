@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Response;
+namespace Devarts\PlausiblePHP\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Response\SharedLink;
+use Devarts\PlausiblePHP\Response\SharedLink;
 
 class SharedLinkTest extends TestCase
 {

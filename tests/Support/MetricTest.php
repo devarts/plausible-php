@@ -1,10 +1,10 @@
 <?php
 
-namespace Plausible\Test\Support;
+namespace Devarts\PlausiblePHP\Test\Support;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Plausible\Support\Metric;
+use Devarts\PlausiblePHP\Support\Metric;
 
 class MetricTest extends TestCase
 {

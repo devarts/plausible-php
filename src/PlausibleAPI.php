@@ -1,14 +1,14 @@
 <?php
 
-namespace Plausible;
+namespace Devarts\PlausiblePHP;
 
 use GuzzleHttp\Client;
-use Plausible\Response\AggregatedMetrics;
-use Plausible\Response\BreakdownCollection;
-use Plausible\Response\Goal;
-use Plausible\Response\SharedLink;
-use Plausible\Response\TimeseriesCollection;
-use Plausible\Response\Website;
+use Devarts\PlausiblePHP\Response\AggregatedMetrics;
+use Devarts\PlausiblePHP\Response\BreakdownCollection;
+use Devarts\PlausiblePHP\Response\Goal;
+use Devarts\PlausiblePHP\Response\SharedLink;
+use Devarts\PlausiblePHP\Response\TimeseriesCollection;
+use Devarts\PlausiblePHP\Response\Website;
 
 class PlausibleAPI
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Plausible\Support;
+namespace Devarts\PlausiblePHP\Support;
 
 use InvalidArgumentException;
 

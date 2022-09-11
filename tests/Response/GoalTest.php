@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Response;
+namespace Devarts\PlausiblePHP\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Response\Goal;
+use Devarts\PlausiblePHP\Response\Goal;
 
 class GoalTest extends TestCase
 {

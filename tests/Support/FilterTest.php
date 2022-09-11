@@ -1,11 +1,11 @@
 <?php
 
-namespace Plausible\Test\Support;
+namespace Devarts\PlausiblePHP\Test\Support;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Plausible\Support\Filter;
-use Plausible\Support\Property;
+use Devarts\PlausiblePHP\Support\Filter;
+use Devarts\PlausiblePHP\Support\Property;
 
 class FilterTest extends TestCase
 {

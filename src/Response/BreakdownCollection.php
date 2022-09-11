@@ -1,6 +1,6 @@
 <?php
 
-namespace Plausible\Response;
+namespace Devarts\PlausiblePHP\Response;
 
 class BreakdownCollection extends BaseCollection
 {

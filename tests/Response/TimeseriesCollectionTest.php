@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Response;
+namespace Devarts\PlausiblePHP\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Response\TimeseriesCollection;
+use Devarts\PlausiblePHP\Response\TimeseriesCollection;
 
 class TimeseriesCollectionTest extends TestCase
 {

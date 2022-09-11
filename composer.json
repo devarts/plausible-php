@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Plausible\\": "src"
+            "Devarts\\PlausiblePHP\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Plausible\\Test\\": "tests"
+            "Devarts\\PlausiblePHP\\Test\\": "tests"
         }
     }
 }

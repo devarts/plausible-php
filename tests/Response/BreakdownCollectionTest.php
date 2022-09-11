@@ -1,9 +1,9 @@
 <?php
 
-namespace Plausible\Test\Response;
+namespace Devarts\PlausiblePHP\Test\Response;
 
 use PHPUnit\Framework\TestCase;
-use Plausible\Response\BreakdownCollection;
+use Devarts\PlausiblePHP\Response\BreakdownCollection;
 
 class BreakdownCollectionTest extends TestCase
 {
