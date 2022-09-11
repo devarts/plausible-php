@@ -29,6 +29,9 @@ nb-configuration.xml
 /*.sublime-project
 *.sublime-workspace
 
+# PHPUnit
+.phpunit.result.cache
+
 build
 composer.lock
 docs
