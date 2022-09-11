@@ -2,7 +2,9 @@
 
 namespace Plausible\Response;
 
-abstract class BaseObject
+use stdClass;
+
+abstract class BaseObject extends stdClass
 {
     protected function __construct() {}
 
