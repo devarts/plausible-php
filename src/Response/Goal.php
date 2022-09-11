@@ -3,8 +3,8 @@
 namespace Plausible\Response;
 
 /**
+ * @property int $id
  * @property string $domain
- * @property string $id
  * @property string $goal_type
  * @property string|null $event_name
  * @property string|null $page_path

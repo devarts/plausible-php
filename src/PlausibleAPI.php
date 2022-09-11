@@ -120,9 +120,13 @@ class PlausibleAPI
         return Goal::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function deleteGoal(string $goal_id): bool
+    public function deleteGoal(string $goal_id, string $site_id): bool
     {
-        $response = $this->client->delete('sites/goals/' . urlencode($goal_id));
+        $response = $this->client->delete('sites/goals/' . urlencode($goal_id), [
+            'form_params' => [
+                'site_id' => $site_id,
+            ],
+        ]);
 
         return json_decode($response->getBody()->getContents(), true)['deleted'];
     }

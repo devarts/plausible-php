@@ -4,7 +4,7 @@ namespace Plausible\Response;
 
 /**
  * @property int $value
- * @property float $change
+ * @property int $change
  */
 class AggregatedMetric extends BaseObject
 {
