@@ -122,7 +122,7 @@ class PlausibleAPI
 
     public function deleteGoal(int $goal_id, string $site_id): bool
     {
-        $response = $this->client->delete('sites/goals/' . urlencode($goal_id), [
+        $response = $this->client->delete('sites/goals/' . urlencode((string) $goal_id), [
             'form_params' => [
                 'site_id' => $site_id,
             ],
