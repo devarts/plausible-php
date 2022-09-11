@@ -5,7 +5,7 @@
 [![License](https://poser.pugx.org/devarts/plausible-php/license.svg)](https://packagist.org/packages/devarts/plausible-php)
 
 The library provides access to the Plausible API from applications written in the PHP language. 
-It includes a pre-defined set of classes for API resources that initialize themselves dynamically from API responses.
+It includes a pre-defined set of classes for API resources that initialize themselves from API responses.
 
 ## Requirements
 
