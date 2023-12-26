@@ -2,6 +2,15 @@
 
 namespace Devarts\PlausiblePHP;
 
+use Devarts\PlausiblePHP\Request\CreateGoalRequest;
+use Devarts\PlausiblePHP\Request\CreateSharedLinkRequest;
+use Devarts\PlausiblePHP\Request\CreateWebsiteRequest;
+use Devarts\PlausiblePHP\Request\DeleteGoalRequest;
+use Devarts\PlausiblePHP\Request\GetAggregateRequest;
+use Devarts\PlausiblePHP\Request\GetBreakdownRequest;
+use Devarts\PlausiblePHP\Request\GetRealtimeVisitorsRequest;
+use Devarts\PlausiblePHP\Request\GetTimeseriesRequest;
+use Devarts\PlausiblePHP\Request\UpdateWebsiteRequest;
 use GuzzleHttp\Client;
 use Devarts\PlausiblePHP\Response\AggregatedMetrics;
 use Devarts\PlausiblePHP\Response\BreakdownCollection;
@@ -25,64 +34,55 @@ class PlausibleAPI
         ]);
     }
 
-    public function getRealtimeVisitors(string $site_id): int
+    public function getRealtimeVisitors(GetRealtimeVisitorsRequest $request): int
     {
         $response = $this->client->get('stats/realtime/visitors', [
-            'query' => [
-                'site_id' => $site_id,
-            ],
+            'query' => $request->toRequestPayload(),
         ]);
 
         return (int) $response->getBody()->getContents();
     }
 
-    public function getAggregate(string $site_id, array $extras = []): AggregatedMetrics
+    public function getAggregate(GetAggregateRequest $request): AggregatedMetrics
     {
         $response = $this->client->get('stats/aggregate', [
-            'query' => array_merge(
-                $extras,
-                [
-                    'site_id' => $site_id,
-                ]
-            ),
+            'query' => $request->toRequestPayload(),
         ]);
 
         return AggregatedMetrics::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function getTimeseries(string $site_id, array $extras = []): TimeseriesCollection
+    public function getTimeseries(GetTimeseriesRequest $request): TimeseriesCollection
     {
         $response = $this->client->get('stats/timeseries', [
-            'query' => array_merge(
-                $extras,
-                [
-                    'site_id' => $site_id,
-                ]
-            ),
+            'query' => $request->toRequestPayload(),
         ]);
 
         return TimeseriesCollection::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function getBreakdown(string $site_id, string $property, array $extras = []): BreakdownCollection
+    public function getBreakdown(GetBreakdownRequest $request): BreakdownCollection
     {
         $response = $this->client->get('stats/breakdown', [
-            'query' => array_merge(
-                $extras,
-                [
-                    'site_id' => $site_id,
-                    'property' => $property,
-                ]
-            ),
+            'query' => $request->toRequestPayload(),
         ]);
 
         return BreakdownCollection::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function createWebsite(array $payload): Website
+    public function createWebsite(CreateWebsiteRequest $request): Website
     {
         $response = $this->client->post('sites', [
-            'form_params' => $payload,
+            'form_params' => $request->toRequestPayload(),
+        ]);
+
+        return Website::fromApiResponse($response->getBody()->getContents());
+    }
+
+    public function updateWebsite(string $site_id, UpdateWebsiteRequest $request): Website
+    {
+        $response = $this->client->put('sites/' . urlencode($site_id), [
+            'form_params' => $request->toRequestPayload(),
         ]);
 
         return Website::fromApiResponse($response->getBody()->getContents());
@@ -102,30 +102,28 @@ class PlausibleAPI
         return Website::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function createSharedLink(array $payload): SharedLink
+    public function createSharedLink(CreateSharedLinkRequest $request): SharedLink
     {
         $response = $this->client->put('sites/shared-links', [
-            'form_params' => $payload,
+            'form_params' => $request->toRequestPayload(),
         ]);
 
         return SharedLink::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function createGoal(array $payload): Goal
+    public function createGoal(CreateGoalRequest $request): Goal
     {
         $response = $this->client->put('sites/goals', [
-            'form_params' => $payload,
+            'form_params' => $request->toRequestPayload(),
         ]);
 
         return Goal::fromApiResponse($response->getBody()->getContents());
     }
 
-    public function deleteGoal(int $goal_id, string $site_id): bool
+    public function deleteGoal(int $goal_id, DeleteGoalRequest $request): bool
     {
         $response = $this->client->delete('sites/goals/' . urlencode((string) $goal_id), [
-            'form_params' => [
-                'site_id' => $site_id,
-            ],
+            'form_params' => $request->toRequestPayload(),
         ]);
 
         return json_decode($response->getBody()->getContents(), true)['deleted'];

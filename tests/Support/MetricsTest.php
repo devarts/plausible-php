@@ -4,18 +4,18 @@ namespace Devarts\PlausiblePHP\Test\Support;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Devarts\PlausiblePHP\Support\Metric;
+use Devarts\PlausiblePHP\Support\Metrics;
 
-class MetricTest extends TestCase
+class MetricsTest extends TestCase
 {
     /**
      * @test
      */
     public function it_should_stringify_metrics(): void
     {
-        $metric = Metric::create()
-            ->add(Metric::VISITS)
-            ->add(Metric::VISIT_DURATION);
+        $metric = Metrics::create()
+            ->add(Metrics::VISITS)
+            ->add(Metrics::VISIT_DURATION);
 
         $this->assertEquals(
             'visits,visit_duration',
@@ -28,7 +28,7 @@ class MetricTest extends TestCase
      */
     public function it_should_stringify_empty_metrics(): void
     {
-        $metric = Metric::create();
+        $metric = Metrics::create();
 
         $this->assertEquals('', $metric->toString());
     }
@@ -38,7 +38,7 @@ class MetricTest extends TestCase
      */
     public function it_should_add_custom_metric(): void
     {
-        $metric = Metric::create()->add('custom_metric');
+        $metric = Metrics::create()->add('custom_metric');
 
         $this->assertEquals(
             'custom_metric',

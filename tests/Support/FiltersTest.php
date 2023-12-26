@@ -4,20 +4,20 @@ namespace Devarts\PlausiblePHP\Test\Support;
 
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Devarts\PlausiblePHP\Support\Filter;
+use Devarts\PlausiblePHP\Support\Filters;
 use Devarts\PlausiblePHP\Support\Property;
 
-class FilterTest extends TestCase
+class FiltersTest extends TestCase
 {
     /**
      * @test
      */
     public function it_should_stringify_filters(): void
     {
-        $filter = Filter::create()
+        $filter = Filters::create()
             ->by(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
             ->by(Property::EVENT_NAME, 'Signup')
-            ->by(Property::VISIT_COUNTRY, 'Germany', Filter::NOT_EQUAL)
+            ->by(Property::VISIT_COUNTRY, 'Germany', Filters::NOT_EQUAL)
             ->by(Property::VISIT_OS_VERSION, 2.2)
             ->by('event:props:custom', 'custom_value');
 
@@ -26,10 +26,10 @@ class FilterTest extends TestCase
             $filter->toString()
         );
 
-        $filter = Filter::create()
+        $filter = Filters::create()
             ->byVisitBrowser(['Chrome', 'Firefox'])
             ->byEventName('Signup')
-            ->byVisitCountry('Germany', Filter::NOT_EQUAL)
+            ->byVisitCountry('Germany', Filters::NOT_EQUAL)
             ->byVisitOsVersion(2.2)
             ->byEventCustomProperty('custom', 'custom_value');
 
@@ -44,7 +44,7 @@ class FilterTest extends TestCase
      */
     public function it_should_stringify_empty_filters(): void
     {
-        $filter = Filter::create();
+        $filter = Filters::create();
 
         $this->assertEquals('', $filter->toString());
     }
@@ -57,7 +57,7 @@ class FilterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Cannot filter multiple values with `!=` comparison');
 
-        Filter::create()->by(Property::VISIT_CITY, ['Prague', 'Vienna'], Filter::NOT_EQUAL);
+        Filters::create()->by(Property::VISIT_CITY, ['Prague', 'Vienna'], Filters::NOT_EQUAL);
     }
 
     /**
@@ -68,7 +68,7 @@ class FilterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Value must be either array or scalar');
 
-        Filter::create()->by(Property::VISIT_SOURCE, (object) ['property' => 'value']);
+        Filters::create()->by(Property::VISIT_SOURCE, (object) ['property' => 'value']);
     }
 
     /**
@@ -76,7 +76,7 @@ class FilterTest extends TestCase
      */
     public function it_should_add_custom_property(): void
     {
-        $filter = Filter::create()->by('custom_property', 'custom_value');
+        $filter = Filters::create()->by('custom_property', 'custom_value');
 
         $this->assertEquals(
             'custom_property==custom_value',
@@ -92,6 +92,6 @@ class FilterTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unsupported comparison provided: `>`');
 
-        Filter::create()->by(Property::VISIT_SOURCE, 'Chrome', '>');
+        Filters::create()->by(Property::VISIT_SOURCE, 'Chrome', '>');
     }
 }

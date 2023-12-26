@@ -4,7 +4,7 @@ namespace Devarts\PlausiblePHP\Support;
 
 use InvalidArgumentException;
 
-class Filter
+class Filters
 {
     public const EQUAL = '==';
     public const NOT_EQUAL = '!=';

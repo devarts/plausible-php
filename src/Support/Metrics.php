@@ -2,9 +2,7 @@
 
 namespace Devarts\PlausiblePHP\Support;
 
-use InvalidArgumentException;
-
-class Metric
+class Metrics
 {
     public const VISITORS = 'visitors';
     public const PAGEVIEWS = 'pageviews';
