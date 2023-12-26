@@ -31,10 +31,13 @@ use Devarts\PlausiblePHP\Support\Filter;
 
 $plausible = new PlausibleAPI('{plausible_api_token}');
 
+$metrics = Metric::create()->addBounceRate()->addVisitors();
+$filters = Filter::create()->addVisitBrowser('Chrome', Filter::NOT_EQUAL);
+
 $timeseries = $plausible->getTimeseries('example.com', [
-    'period' => Period::DAYS_30,
-    'metrics' => Metric::create()->addBounceRate()->addVisitors()->toString(),
-    'filters' => Filter::create()->addVisitBrowser('Chrome', Filter::NOT_EQUAL)->toString(),
+    'period'  => Period::DAYS_30,
+    'metrics' => $metrics->toString(),
+    'filters' => $filters->toString(),
 ]);
 
 foreach ($timeseries as $timepoint) {
