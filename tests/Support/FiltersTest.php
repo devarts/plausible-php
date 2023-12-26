@@ -15,11 +15,11 @@ class FiltersTest extends TestCase
     public function it_should_stringify_filters(): void
     {
         $filter = Filters::create()
-            ->by(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
-            ->by(Property::EVENT_NAME, 'Signup')
-            ->by(Property::VISIT_COUNTRY, 'Germany', Filters::NOT_EQUAL)
-            ->by(Property::VISIT_OS_VERSION, 2.2)
-            ->by('event:props:custom', 'custom_value');
+            ->add(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
+            ->add(Property::EVENT_NAME, 'Signup')
+            ->add(Property::VISIT_COUNTRY, 'Germany', Filters::NOT_EQUAL)
+            ->add(Property::VISIT_OS_VERSION, 2.2)
+            ->add('event:props:custom', 'custom_value');
 
         $this->assertEquals(
             'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
@@ -27,11 +27,11 @@ class FiltersTest extends TestCase
         );
 
         $filter = Filters::create()
-            ->byVisitBrowser(['Chrome', 'Firefox'])
-            ->byEventName('Signup')
-            ->byVisitCountry('Germany', Filters::NOT_EQUAL)
-            ->byVisitOsVersion(2.2)
-            ->byEventCustomProperty('custom', 'custom_value');
+            ->addVisitBrowser(['Chrome', 'Firefox'])
+            ->addEventName('Signup')
+            ->addVisitCountry('Germany', Filters::NOT_EQUAL)
+            ->addVisitOsVersion(2.2)
+            ->addEventCustomProperty('custom', 'custom_value');
 
         $this->assertEquals(
             'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
@@ -57,7 +57,7 @@ class FiltersTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Cannot filter multiple values with `!=` comparison');
 
-        Filters::create()->by(Property::VISIT_CITY, ['Prague', 'Vienna'], Filters::NOT_EQUAL);
+        Filters::create()->add(Property::VISIT_CITY, ['Prague', 'Vienna'], Filters::NOT_EQUAL);
     }
 
     /**
@@ -68,7 +68,7 @@ class FiltersTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Value must be either array or scalar');
 
-        Filters::create()->by(Property::VISIT_SOURCE, (object) ['property' => 'value']);
+        Filters::create()->add(Property::VISIT_SOURCE, (object) ['property' => 'value']);
     }
 
     /**
@@ -76,7 +76,7 @@ class FiltersTest extends TestCase
      */
     public function it_should_add_custom_property(): void
     {
-        $filter = Filters::create()->by('custom_property', 'custom_value');
+        $filter = Filters::create()->add('custom_property', 'custom_value');
 
         $this->assertEquals(
             'custom_property==custom_value',
@@ -92,6 +92,6 @@ class FiltersTest extends TestCase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Unsupported comparison provided: `>`');
 
-        Filters::create()->by(Property::VISIT_SOURCE, 'Chrome', '>');
+        Filters::create()->add(Property::VISIT_SOURCE, 'Chrome', '>');
     }
 }
