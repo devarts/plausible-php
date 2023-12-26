@@ -12,15 +12,7 @@ class Metric
     public const VISIT_DURATION = 'visit_duration';
     public const EVENTS = 'events';
     public const VISITS = 'visits';
-
-    public const SUPPORTED_METRICS = [
-        self::VISITORS,
-        self::PAGEVIEWS,
-        self::BOUNCE_RATE,
-        self::VISIT_DURATION,
-        self::EVENTS,
-        self::VISITS,
-    ];
+    public const VIEWS_PER_VISIT = 'views_per_visit';
 
     /**
      * @var string[]
@@ -34,15 +26,46 @@ class Metric
 
     public function add(string $metric): self
     {
-        if (! in_array($metric, self::SUPPORTED_METRICS)) {
-            throw new InvalidArgumentException("Unsupported metric provided: `$metric`");
-        }
-
         $metrics = clone $this;
 
         $metrics->metrics[] = $metric;
 
         return $metrics;
+    }
+
+    public function addVisitors(): self
+    {
+        return $this->add(self::VISITORS);
+    }
+
+    public function addPageviews(): self
+    {
+        return $this->add(self::PAGEVIEWS);
+    }
+
+    public function addBounceRate(): self
+    {
+        return $this->add(self::BOUNCE_RATE);
+    }
+
+    public function addVisitDuration(): self
+    {
+        return $this->add(self::VISIT_DURATION);
+    }
+
+    public function addEvents(): self
+    {
+        return $this->add(self::EVENTS);
+    }
+
+    public function addVisits(): self
+    {
+        return $this->add(self::VISITS);
+    }
+
+    public function addViewsPerVisit(): self
+    {
+        return $this->add(self::VIEWS_PER_VISIT);
     }
 
     public function toString(): string

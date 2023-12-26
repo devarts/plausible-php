@@ -18,10 +18,23 @@ class FilterTest extends TestCase
             ->add(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
             ->add(Property::EVENT_NAME, 'Signup')
             ->add(Property::VISIT_COUNTRY, 'Germany', Filter::NOT_EQUAL)
-            ->add(Property::VISIT_OS_VERSION, 2.2);
+            ->add(Property::VISIT_OS_VERSION, 2.2)
+            ->add('event:props:custom', 'custom_value');
 
         $this->assertEquals(
-            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2',
+            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
+            $filter->toString()
+        );
+
+        $filter = Filter::create()
+            ->addVisitBrowser(['Chrome', 'Firefox'])
+            ->addEventName('Signup')
+            ->addVisitCountry('Germany', Filter::NOT_EQUAL)
+            ->addVisitOsVersion(2.2)
+            ->addEventCustomProperty('custom', 'custom_value');
+
+        $this->assertEquals(
+            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
             $filter->toString()
         );
     }
@@ -61,12 +74,14 @@ class FilterTest extends TestCase
     /**
      * @test
      */
-    public function it_should_throw_exception_when_adding_filter_for_unsupported_property(): void
+    public function it_should_add_custom_property(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported property provided: `unsupported_property`');
+        $filter = Filter::create()->add('custom_property', 'custom_value');
 
-        Filter::create()->add('unsupported_property', 'Chrome');
+        $this->assertEquals(
+            'custom_property==custom_value',
+            $filter->toString()
+        );
     }
 
     /**
