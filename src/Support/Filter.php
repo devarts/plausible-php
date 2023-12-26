@@ -28,7 +28,7 @@ class Filter
      * @param scalar|array $value
      * @throws InvalidArgumentException
      */
-    public function add(string $name, $value, string $comparison = self::EQUAL): self
+    public function by(string $name, $value, string $comparison = self::EQUAL): self
     {
         if (! is_array($value) && ! is_scalar($value)) {
             throw new InvalidArgumentException('Value must be either array or scalar');
@@ -49,104 +49,104 @@ class Filter
         return $filters;
     }
 
-    public function addEventName($value, string $comparison = self::EQUAL): self
+    public function byEventName($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::EVENT_NAME, $value, $comparison);
+        return $this->by(Property::EVENT_NAME, $value, $comparison);
     }
 
-    public function addEventPage($value, string $comparison = self::EQUAL): self
+    public function byEventPage($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::EVENT_PAGE, $value, $comparison);
+        return $this->by(Property::EVENT_PAGE, $value, $comparison);
     }
 
-    public function addEventCustomProperty(string $property, $value, string $comparison = self::EQUAL): self
+    public function byEventCustomProperty(string $property, $value, string $comparison = self::EQUAL): self
     {
-        return $this->add("event:props:$property", $value, $comparison);
+        return $this->by("event:props:$property", $value, $comparison);
     }
 
-    public function addVisitEntryPage($value, string $comparison = self::EQUAL): self
+    public function byVisitEntryPage($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_ENTRY_PAGE, $value, $comparison);
+        return $this->by(Property::VISIT_ENTRY_PAGE, $value, $comparison);
     }
 
-    public function addVisitExitPage($value, string $comparison = self::EQUAL): self
+    public function byVisitExitPage($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_EXIT_PAGE, $value, $comparison);
+        return $this->by(Property::VISIT_EXIT_PAGE, $value, $comparison);
     }
 
-    public function addVisitSource($value, string $comparison = self::EQUAL): self
+    public function byVisitSource($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_SOURCE, $value, $comparison);
+        return $this->by(Property::VISIT_SOURCE, $value, $comparison);
     }
 
-    public function addVisitReferrer($value, string $comparison = self::EQUAL): self
+    public function byVisitReferrer($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_REFERRER, $value, $comparison);
+        return $this->by(Property::VISIT_REFERRER, $value, $comparison);
     }
 
-    public function addVisitUtmMedium($value, string $comparison = self::EQUAL): self
+    public function byVisitUtmMedium($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_UTM_MEDIUM, $value, $comparison);
+        return $this->by(Property::VISIT_UTM_MEDIUM, $value, $comparison);
     }
 
-    public function addVisitUtmSource($value, string $comparison = self::EQUAL): self
+    public function byVisitUtmSource($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_UTM_SOURCE, $value, $comparison);
+        return $this->by(Property::VISIT_UTM_SOURCE, $value, $comparison);
     }
 
-    public function addVisitUtmCampaign($value, string $comparison = self::EQUAL): self
+    public function byVisitUtmCampaign($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_UTM_CAMPAIGN, $value, $comparison);
+        return $this->by(Property::VISIT_UTM_CAMPAIGN, $value, $comparison);
     }
 
-    public function addVisitUtmContent($value, string $comparison = self::EQUAL): self
+    public function byVisitUtmContent($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_UTM_CONTENT, $value, $comparison);
+        return $this->by(Property::VISIT_UTM_CONTENT, $value, $comparison);
     }
 
-    public function addVisitUtmTerm($value, string $comparison = self::EQUAL): self
+    public function byVisitUtmTerm($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_UTM_TERM, $value, $comparison);
+        return $this->by(Property::VISIT_UTM_TERM, $value, $comparison);
     }
 
-    public function addVisitDevice($value, string $comparison = self::EQUAL): self
+    public function byVisitDevice($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_DEVICE, $value, $comparison);
+        return $this->by(Property::VISIT_DEVICE, $value, $comparison);
     }
 
-    public function addVisitBrowser($value, string $comparison = self::EQUAL): self
+    public function byVisitBrowser($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_BROWSER, $value, $comparison);
+        return $this->by(Property::VISIT_BROWSER, $value, $comparison);
     }
 
-    public function addVisitBrowserVersion($value, string $comparison = self::EQUAL): self
+    public function byVisitBrowserVersion($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_BROWSER_VERSION, $value, $comparison);
+        return $this->by(Property::VISIT_BROWSER_VERSION, $value, $comparison);
     }
 
-    public function addVisitOs($value, string $comparison = self::EQUAL): self
+    public function byVisitOs($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_OS, $value, $comparison);
+        return $this->by(Property::VISIT_OS, $value, $comparison);
     }
 
-    public function addVisitOsVersion($value, string $comparison = self::EQUAL): self
+    public function byVisitOsVersion($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_OS_VERSION, $value, $comparison);
+        return $this->by(Property::VISIT_OS_VERSION, $value, $comparison);
     }
 
-    public function addVisitCountry($value, string $comparison = self::EQUAL): self
+    public function byVisitCountry($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_COUNTRY, $value, $comparison);
+        return $this->by(Property::VISIT_COUNTRY, $value, $comparison);
     }
 
-    public function addVisitRegion($value, string $comparison = self::EQUAL): self
+    public function byVisitRegion($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_REGION, $value, $comparison);
+        return $this->by(Property::VISIT_REGION, $value, $comparison);
     }
 
-    public function addVisitCity($value, string $comparison = self::EQUAL): self
+    public function byVisitCity($value, string $comparison = self::EQUAL): self
     {
-        return $this->add(Property::VISIT_CITY, $value, $comparison);
+        return $this->by(Property::VISIT_CITY, $value, $comparison);
     }
 
     public function toString(): string
