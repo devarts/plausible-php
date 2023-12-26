@@ -38,7 +38,7 @@ class Metric
         return $this->add(self::VISITORS);
     }
 
-    public function addPageViews(): self
+    public function addPageviews(): self
     {
         return $this->add(self::PAGEVIEWS);
     }
