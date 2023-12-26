@@ -53,6 +53,101 @@ class Filter
         return $filters;
     }
 
+    public function addEventName($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::EVENT_NAME, $value, $comparison);
+    }
+
+    public function addEventPage($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::EVENT_PAGE, $value, $comparison);
+    }
+
+    public function addVisitEntryPage($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_ENTRY_PAGE, $value, $comparison);
+    }
+
+    public function addVisitExitPage($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_EXIT_PAGE, $value, $comparison);
+    }
+
+    public function addVisitSource($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_SOURCE, $value, $comparison);
+    }
+
+    public function addVisitReferrer($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_REFERRER, $value, $comparison);
+    }
+
+    public function addVisitUtmMedium($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_UTM_MEDIUM, $value, $comparison);
+    }
+
+    public function addVisitUtmSource($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_UTM_SOURCE, $value, $comparison);
+    }
+
+    public function addVisitUtmCampaign($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_UTM_CAMPAIGN, $value, $comparison);
+    }
+
+    public function addVisitUtmContent($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_UTM_CONTENT, $value, $comparison);
+    }
+
+    public function addVisitUtmTerm($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_UTM_TERM, $value, $comparison);
+    }
+
+    public function addVisitDevice($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_DEVICE, $value, $comparison);
+    }
+
+    public function addVisitBrowser($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_BROWSER, $value, $comparison);
+    }
+
+    public function addVisitBrowserVersion($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_BROWSER_VERSION, $value, $comparison);
+    }
+
+    public function addVisitOs($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_OS, $value, $comparison);
+    }
+
+    public function addVisitOsVersion($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_OS_VERSION, $value, $comparison);
+    }
+
+    public function addVisitCountry($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_COUNTRY, $value, $comparison);
+    }
+
+    public function addVisitRegion($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_REGION, $value, $comparison);
+    }
+
+    public function addVisitCity($value, string $comparison = self::EQUAL): self
+    {
+        return $this->add(Property::VISIT_CITY, $value, $comparison);
+    }
+
     public function toString(): string
     {
         return implode(';', $this->filters);
