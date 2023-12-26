@@ -14,16 +14,6 @@ class Metric
     public const VISITS = 'visits';
     public const VIEWS_PER_VISIT = 'views_per_visit';
 
-    public const SUPPORTED_METRICS = [
-        self::VISITORS,
-        self::PAGEVIEWS,
-        self::BOUNCE_RATE,
-        self::VISIT_DURATION,
-        self::EVENTS,
-        self::VISITS,
-        self::VIEWS_PER_VISIT,
-    ];
-
     /**
      * @var string[]
      */
@@ -36,10 +26,6 @@ class Metric
 
     public function add(string $metric): self
     {
-        if (! in_array($metric, self::SUPPORTED_METRICS)) {
-            throw new InvalidArgumentException("Unsupported metric provided: `$metric`");
-        }
-
         $metrics = clone $this;
 
         $metrics->metrics[] = $metric;
