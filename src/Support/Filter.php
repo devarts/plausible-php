@@ -38,10 +38,6 @@ class Filter
             throw new InvalidArgumentException('Cannot filter multiple values with `!=` comparison');
         }
 
-        if (! in_array($name, Property::SUPPORTED_PROPERTIES)) {
-            throw new InvalidArgumentException("Unsupported property provided: `$name`");
-        }
-
         if (! in_array($comparison, self::SUPPORTED_COMPARISONS)) {
             throw new InvalidArgumentException("Unsupported comparison provided: `$comparison`");
         }
@@ -61,6 +57,11 @@ class Filter
     public function addEventPage($value, string $comparison = self::EQUAL): self
     {
         return $this->add(Property::EVENT_PAGE, $value, $comparison);
+    }
+
+    public function addEventCustomProperty(string $property, $value, string $comparison = self::EQUAL): self
+    {
+        return $this->add("event:props:$property", $value, $comparison);
     }
 
     public function addVisitEntryPage($value, string $comparison = self::EQUAL): self
