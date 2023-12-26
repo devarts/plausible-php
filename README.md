@@ -24,17 +24,17 @@ $ composer require devarts/plausible-php
 Simple usage looks like:
 
 ``` php
-$plausible = new Devarts\PlausiblePHP\PlausibleAPI('{plausible_api_token}');
+use Devarts\PlausiblePHP\PlausibleAPI;
+use Devarts\PlausiblePHP\Support\Period;
+use Devarts\PlausiblePHP\Support\Metric;
+use Devarts\PlausiblePHP\Support\Filter;
+
+$plausible = new PlausibleAPI('{plausible_api_token}');
 
 $timeseries = $plausible->getTimeseries('example.com', [
-    'period' => Devarts\PlausiblePHP\Support\Period::DAYS_30,
-    'metrics' => Devarts\PlausiblePHP\Support\Metric::create()
-        ->add(Devarts\PlausiblePHP\Support\Metric::BOUNCE_RATE)
-        ->add(Devarts\PlausiblePHP\Support\Metric::VISITORS)
-        ->toString(),
-    'filters' => Devarts\PlausiblePHP\Support\Filter::create()
-        ->add(Devarts\PlausiblePHP\Support\Property::VISIT_BROWSER, 'Chrome', Devarts\PlausiblePHP\Support\Filter::NOT_EQUAL)
-        ->toString(),
+    'period' => Period::DAYS_30,
+    'metrics' => Metric::create()->addBounceRate()->addVisitors()->toString(),
+    'filters' => Filter::create()->addVisitBrowser('Chrome', Filter::NOT_EQUAL)->toString(),
 ]);
 
 foreach ($timeseries as $timepoint) {
