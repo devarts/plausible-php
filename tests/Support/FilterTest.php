@@ -18,10 +18,23 @@ class FilterTest extends TestCase
             ->add(Property::VISIT_BROWSER, ['Chrome', 'Firefox'])
             ->add(Property::EVENT_NAME, 'Signup')
             ->add(Property::VISIT_COUNTRY, 'Germany', Filter::NOT_EQUAL)
-            ->add(Property::VISIT_OS_VERSION, 2.2);
+            ->add(Property::VISIT_OS_VERSION, 2.2)
+            ->add('event:props:custom', 'custom_value');
 
         $this->assertEquals(
-            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2',
+            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
+            $filter->toString()
+        );
+
+        $filter = Filter::create()
+            ->addVisitBrowser(['Chrome', 'Firefox'])
+            ->addEventName('Signup')
+            ->addVisitCountry('Germany', Filter::NOT_EQUAL)
+            ->addVisitOsVersion(2.2)
+            ->addEventCustomProperty('custom', 'custom_value');
+
+        $this->assertEquals(
+            'visit:browser==Chrome|Firefox;event:name==Signup;visit:country!=Germany;visit:os_version==2.2;event:props:custom==custom_value',
             $filter->toString()
         );
     }
