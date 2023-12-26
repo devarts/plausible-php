@@ -18,7 +18,8 @@ class BreakdownItemTest extends TestCase
             'pageviews' => 567,
             'visit_duration' => 347,
             'events' => 25,
-            'visits' => 20000
+            'visits' => 20000,
+            'custom_property' => 'custom_value',
         ]);
 
         $this->assertEquals('Google', $breakdown_item->source);
@@ -28,6 +29,7 @@ class BreakdownItemTest extends TestCase
         $this->assertEquals(347, $breakdown_item->visit_duration);
         $this->assertEquals(25, $breakdown_item->events);
         $this->assertEquals(20000, $breakdown_item->visits);
+        $this->assertEquals('custom_value', $breakdown_item->custom_property);
 
         $this->assertFalse(property_exists($breakdown_item, 'page'));
         $this->assertFalse(property_exists($breakdown_item, 'browser_version'));
