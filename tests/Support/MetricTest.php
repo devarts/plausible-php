@@ -36,11 +36,13 @@ class MetricTest extends TestCase
     /**
      * @test
      */
-    public function it_should_throw_exception_when_adding_filter_for_unsupported_property(): void
+    public function it_should_add_custom_metric(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported metric provided: `unsupported_metric`');
+        $metric = Metric::create()->add('custom_metric');
 
-        Metric::create()->add('unsupported_metric');
+        $this->assertEquals(
+            'custom_metric',
+            $metric->toString()
+        );
     }
 }

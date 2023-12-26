@@ -74,12 +74,14 @@ class FilterTest extends TestCase
     /**
      * @test
      */
-    public function it_should_throw_exception_when_adding_filter_for_unsupported_property(): void
+    public function it_should_add_custom_property(): void
     {
-        $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported property provided: `unsupported_property`');
+        $filter = Filter::create()->add('custom_property', 'custom_value');
 
-        Filter::create()->add('unsupported_property', 'Chrome');
+        $this->assertEquals(
+            'custom_property==custom_value',
+            $filter->toString()
+        );
     }
 
     /**
