@@ -14,10 +14,10 @@ class PlausibleAPI
 {
     protected Client $client;
 
-    public function __construct(string $token)
+    public function __construct(string $token, string $base_uri = 'https://plausible.io/api/v1/')
     {
         $this->client = new Client([
-            'base_uri' => 'https://plausible.io/api/v1/',
+            'base_uri' => $base_uri,
             'headers' => [
                 'Authorization' => sprintf('Bearer %s', $token),
             ],
