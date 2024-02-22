@@ -88,6 +88,15 @@ class PlausibleAPI
         return Website::fromApiResponse($response->getBody()->getContents());
     }
 
+    public function updateWebsite(string $site_id, array $payload): Website
+    {
+        $response = $this->client->put('sites/' . urlencode($site_id), [
+            'form_params' => $payload,
+        ]);
+
+        return Website::fromApiResponse($response->getBody()->getContents());
+    }
+
     public function deleteWebsite(string $site_id): bool
     {
         $response = $this->client->delete('sites/' . urlencode($site_id));
